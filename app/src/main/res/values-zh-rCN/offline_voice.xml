@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="space_behavior_offline_voice">按住说话（离线中英识别）</string>
+    <string name="offline_voice_preparing">正在准备语音…</string>
+    <string name="offline_voice_listening">正在聆听 · 松手或停顿出字</string>
+    <string name="offline_voice_processing">正在识别…</string>
+    <string name="offline_voice_failed">离线识别失败，请检查麦克风权限后重试。单次录音最长 60 秒。</string>
+    <string name="offline_voice_empty">没有识别到语音。请按住空格，出现聆听提示后再说话。</string>
+    <string name="offline_voice_password">密码输入框不启用语音输入。</string>
+    <string name="offline_voice_permission_retry">允许麦克风权限后，请返回输入框，重新按住空格说话。</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This personal edition supplies English and Simplified Chinese; other locales use English. -->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="space_behavior_offline_voice">Hold to speak (offline Chinese / English)</string>
+    <string name="offline_voice_preparing">Preparing voice…</string>
+    <string name="offline_voice_listening">Listening · release or pause to insert</string>
+    <string name="offline_voice_processing">Recognizing…</string>
+    <string name="offline_voice_failed">Offline recognition failed. Check microphone access and try again. Recording is limited to 60 seconds.</string>
+    <string name="offline_voice_empty">No speech recognized. Hold space, wait for the listening prompt, then speak.</string>
+    <string name="offline_voice_password">Voice input is disabled in password fields.</string>
+    <string name="offline_voice_permission_retry">After allowing microphone access, return to the input field and hold space again.</string>
+</resources>

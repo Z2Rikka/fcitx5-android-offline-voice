@@ -9,6 +9,8 @@
 -dontobfuscate
 
 # Keep JNI interface
+# sherpa reads configuration fields and methods through JNI reflection.
+-keep class com.k2fsa.sherpa.onnx.** { *; }
 -keep class org.fcitx.fcitx5.android.core.* { *; }
 -keep class org.fcitx.fcitx5.android.data.pinyin.customphrase.PinyinCustomPhrase {
     public <init>(...);
