@@ -13,7 +13,7 @@ android {
     namespace = "org.fcitx.fcitx5.android"
 
     defaultConfig {
-        applicationId = "org.fcitx.fcitx5.android"
+        applicationId = "org.fcitx.fcitx5.android.offline"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         @Suppress("UnstableApiUsage")
@@ -42,20 +42,37 @@ android {
         release {
             resValue("mipmap", "app_icon", "@mipmap/ic_launcher")
             resValue("mipmap", "app_icon_round", "@mipmap/ic_launcher_round")
-            resValue("string", "app_name", "@string/app_name_release")
+            resValue("string", "app_name", "Fcitx5 离线语音")
             proguardFile("proguard-rules.pro")
         }
         debug {
             resValue("mipmap", "app_icon", "@mipmap/ic_launcher_debug")
             resValue("mipmap", "app_icon_round", "@mipmap/ic_launcher_round_debug")
-            resValue("string", "app_name", "@string/app_name_debug")
+            resValue("string", "app_name", "Fcitx5 离线语音")
         }
     }
 
+    lint {
+        // Existing upstream translation/formatting errors; new offline voice issues stay visible.
+        baseline = file("lint-baseline.xml")
+    }
+
     androidResources {
+        noCompress += "onnx"
         @Suppress("UnstableApiUsage")
         generateLocaleConfig = true
     }
+}
+
+generateDataDescriptor {
+    // These are read directly from assets, rather than installed into the fcitx filesystem.
+    excludes.addAll(fileTree("src/main/assets/offline-voice").files.map {
+        it.relativeTo(file("src/main/assets")).invariantSeparatorsPath
+    })
+    excludes.addAll(fileTree("src/main/assets/bundled-rime").files.map {
+        it.relativeTo(file("src/main/assets")).invariantSeparatorsPath
+    })
+    symlinks.put("usr/share/rime-data/opencc", "usr/share/opencc")
 }
 
 fcitxComponent {
@@ -77,6 +94,7 @@ ksp {
 }
 
 dependencies {
+    implementation(files("libs/sherpa-onnx-1.12.14-arm64.aar"))
     ksp(project(":codegen"))
     implementation(project(":lib:fcitx5"))
     implementation(project(":lib:fcitx5-lua"))

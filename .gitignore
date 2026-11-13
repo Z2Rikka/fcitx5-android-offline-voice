@@ -1,3 +1,17 @@
+# Offline bundle build inputs and local toolchain
+/.local-build/
+/app/src/main/assets/offline-voice/
+/app/src/main/assets/bundled-rime/
+/app/src/main/jniLibs/
+/dist/
+__pycache__/
+
+# Signing material must never be committed; CI injects it through secrets
+*.p12
+*.jks
+*.keystore
+signing-password
+
 # Module :app
 # Installed data
 /app/src/main/assets/usr/

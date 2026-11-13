@@ -1,0 +1,812 @@
+<?xml version='1.0' encoding='utf-8'?>
+<issues format="6" by="lint 9.4.1" type="baseline" client="gradle" dependencies="false" name="AGP (9.4.1)" variant="all" version="9.4.1">
+    <issue id="UseAppTint" message="Must use `app:tint` instead of `android:tint`" errorLine1="        android:tint=&quot;?android:attr/colorAccent&quot;" errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/layout/fragment_setup.xml" line="47" column="9" />
+    </issue>
+    <issue id="StringFormatMatches" message="Suspicious argument type for formatting argument #1 in `removed_n_items`: conversion is `s`, received `int` (argument #2 in method call) (Did you mean formatting character `d`, 'o' or `x`?)" errorLine1="                showSnackbar(ctx.getString(R.string.removed_n_items, indexed.size)) {" errorLine2="                                                                     ~~~~~~~~~~~~">
+        <location file="src/main/java/org/fcitx/fcitx5/android/ui/common/BaseDynamicListUi.kt" line="160" column="70" />
+        <location file="src/main/res/values-ja/strings.xml" line="227" column="5" message="Conflicting argument declaration here" />
+    </issue>
+    <issue id="StringFormatMatches" message="Inconsistent formatting types for argument #1 in format string `removed_n_items` ('%1$s'): Found both '`s`' here and '`d`' in values/strings.xml" errorLine1="    &lt;string name=&quot;removed_n_items&quot;&gt;%1$s 個のアイテムを削除しました&lt;/string&gt;" errorLine2="                                   ~~~~">
+        <location file="src/main/res/values-ja/strings.xml" line="227" column="36" />
+        <location file="src/main/res/values/strings.xml" line="232" column="5" message="Conflicting argument type (`d') here" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;hide_key_config&quot; is not translated in &quot;de&quot; (German)" errorLine1="    &lt;string name=&quot;hide_key_config&quot;&gt;Hide hotkey configurations&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="14" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;button_haptic_feedback&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;button_haptic_feedback&quot;&gt;Haptic feedback on keypress&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="16" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;button_up_haptic_feedback&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;button_up_haptic_feedback&quot;&gt;Haptic feedback on keyup&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="17" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;button_vibration_milliseconds&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;button_vibration_milliseconds&quot;&gt;Keypress vibration duration&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="18" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;button_press&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;button_press&quot;&gt;Press&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="19" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;button_long_press&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;button_long_press&quot;&gt;Long press&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="20" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;button_vibration_amplitude&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;button_vibration_amplitude&quot;&gt;Keypress vibration amplitude&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="21" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;delete_and_sync_data_message&quot; is not translated in &quot;de&quot; (German) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;delete_and_sync_data_message&quot;&gt;Delete current data directory and synchronize from assets bundled in app&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="26" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;enable_ime_hint&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;enable_ime_hint&quot;&gt;Enable &amp;lt;b&gt;%1$s&amp;lt;/b&gt; in Language and input settings&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="28" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;select_ime_hint&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;select_ime_hint&quot;&gt;Select &amp;lt;b&gt;%1$s&amp;lt;/b&gt; as your default input method&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="30" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;setup_keyboard&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;setup_keyboard&quot;&gt;Finish setting up the keyboard&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="34" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;setup_channel&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;setup_channel&quot;&gt;Setup Wizard&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="35" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;pinyin_dict&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;pinyin_dict&quot;&gt;Pinyin Dictionaries&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="36" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;reloading&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;reloading&quot;&gt;Reloading&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="37" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;importing&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;importing&quot;&gt;Importing&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="38" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;synced&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;synced&quot;&gt;Synced!&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="44" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_listening&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clipboard_listening&quot;&gt;Clipboard listening&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="46" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_limit&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clipboard_limit&quot;&gt;Clipboard history limit&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="47" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_enable&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clipboard_enable&quot;&gt;Enable Clipboard&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="48" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;expanded_candidate_style&quot; is not translated in &quot;de&quot; (German) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;expanded_candidate_style&quot;&gt;Expanded candidate style&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="49" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;expanded_candidate_style_grid&quot; is not translated in &quot;de&quot; (German) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;expanded_candidate_style_grid&quot;&gt;Grid&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="50" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;expanded_candidate_style_flexbox&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;expanded_candidate_style_flexbox&quot;&gt;Flexbox&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="51" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;no_more_input_methods&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;no_more_input_methods&quot;&gt;No more input methods to switch&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="52" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;add_more_input_methods&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;add_more_input_methods&quot;&gt;Would you like to add more input methods?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="53" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;faq&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;faq&quot;&gt;FAQ&lt;/string&gt;" errorLine2="            ~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="55" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;developer&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;developer&quot;&gt;Developer&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="58" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clear_clb_db&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clear_clb_db&quot;&gt;Clear clipboard database&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="59" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;unpin&quot; is not translated in &quot;de&quot; (German)" errorLine1="    &lt;string name=&quot;unpin&quot;&gt;Unpin&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="61" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_suggestion_timeout&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clipboard_suggestion_timeout&quot;&gt;Clipboard suggestion timeout&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="66" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;build_time&quot; is not translated in &quot;de&quot; (German) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;build_time&quot;&gt;Build time&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="68" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;build_git_hash&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;build_git_hash&quot;&gt;Build Git hash&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="69" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;expanded_candidate_grid_span_count&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;expanded_candidate_grid_span_count&quot;&gt;Number of expanded candidate spans in grid style&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="76" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;no_config_options&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;no_config_options&quot;&gt;Currently no configuration options are available&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="77" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;unimplemented_type&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;unimplemented_type&quot;&gt;⛔ Unimplemented type&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="78" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;text_editing&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;text_editing&quot;&gt;Text Editing&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="80" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;instruction_enable_clipboard_listening&quot; is not translated in &quot;de&quot; (German) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;instruction_enable_clipboard_listening&quot;&gt;To use clipboard management, please enable clipboard listening in settings&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="81" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;instruction_copy&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;instruction_copy&quot;&gt;Try copying something&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="82" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;app_crash_message&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;app_crash_message&quot;&gt;Sorry, but we bring you some logs to investigate.&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="86" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;verbose_log_summary&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;verbose_log_summary&quot;&gt;Requires restart&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="89" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;removed_x&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;removed_x&quot;&gt;Removed %1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="90" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;added_x&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;added_x&quot;&gt;Added %1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="91" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;edited_x&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;edited_x&quot;&gt;Edited %1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="92" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;keyboard_long_press_delay&quot; is not translated in &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;keyboard_long_press_delay&quot;&gt;Key long press delay&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="94" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;quickphrase_editor&quot; is not translated in &quot;de&quot; (German)" errorLine1="    &lt;string name=&quot;quickphrase_editor&quot;&gt;Quick Phrase Editor&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="95" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;quickphrase_already_exists&quot; is not translated in &quot;de&quot; (German)" errorLine1="    &lt;string name=&quot;quickphrase_already_exists&quot;&gt;Quick phrase already exists&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="96" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;invalid_quickphrase&quot; is not translated in &quot;de&quot; (German) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;invalid_quickphrase&quot;&gt;Invalid quick phrase type&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="97" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;create_new&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;create_new&quot;&gt;Create new&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="98" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;theme&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;theme&quot;&gt;Theme&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="105" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;key_ripple_effect&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;key_ripple_effect&quot;&gt;Enable key ripple effect&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="106" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;key_border&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;key_border&quot;&gt;Enable key border&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="107" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;brightness&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;brightness&quot;&gt;Brightness&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="108" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;key_radius&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;key_radius&quot;&gt;Key radius&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="109" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;text_editing_button_radius&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;text_editing_button_radius&quot;&gt;Text editing button radius&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="110" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_entry_radius&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clipboard_entry_radius&quot;&gt;Clipboard entry radius&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="111" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;key_horizontal_margin&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;key_horizontal_margin&quot;&gt;Key horizontal margin&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="112" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;key_vertical_margin&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;key_vertical_margin&quot;&gt;Key vertical margin&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="113" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;configure&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;configure&quot;&gt;Configure&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="114" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;choose_image&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;choose_image&quot;&gt;Choose Image…&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="115" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;dark_keys&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;dark_keys&quot;&gt;Dark Keys&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="116" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;recrop_image&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;recrop_image&quot;&gt;Re-Crop Image&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="117" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;navbar_background&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;navbar_background&quot;&gt;Navigation bar background&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="118" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;navbar_bkg_none&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;navbar_bkg_none&quot;&gt;No background&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="119" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;navbar_bkg_color_only&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;navbar_bkg_color_only&quot;&gt;Follow keyboard color&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="120" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;navbar_bkg_full&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;navbar_bkg_full&quot;&gt;Keyboard background image&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="121" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;punctuation_position&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;punctuation_position&quot;&gt;Punctuation position&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="122" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;punctuation_pos_bottom&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;punctuation_pos_bottom&quot;&gt;Bottom (Portrait only)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="123" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;punctuation_pos_top_right&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;punctuation_pos_top_right&quot;&gt;Top Right&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="124" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;punctuation_pos_none&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;punctuation_pos_none&quot;&gt;None&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="125" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;expand_toolbar_by_default&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;expand_toolbar_by_default&quot;&gt;Expand toolbar by default&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="126" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;popup_on_key_press&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;popup_on_key_press&quot;&gt;Popup on key press&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="127" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;disable_animation&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;disable_animation&quot;&gt;Disable animation&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="128" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;import_from_file&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;import_from_file&quot;&gt;Import from file…&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="129" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;duplicate_builtin_theme&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;duplicate_builtin_theme&quot;&gt;Duplicate builtin theme…&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="130" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_logcat_created&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_logcat_created&quot;&gt;Logcat process is already created&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="131" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_quickphrase_parse&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_quickphrase_parse&quot;&gt;Failed to parse quick phrase line: %1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="132" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_quickphrase_filename&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_quickphrase_filename&quot;&gt;The filename extension of %1$s does not indicate a quick phrase&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="133" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_theme_filename&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_theme_filename&quot;&gt;The filename extension of %1$s does not indicate a theme&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="134" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_theme_unknown&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_theme_unknown&quot;&gt;Theme %1$s is unknown&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="135" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_libime_dict_filename&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_libime_dict_filename&quot;&gt;The filename extension of %1$s does not indicate a libime dict&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="136" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_text_dict_filename&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_text_dict_filename&quot;&gt;The filename extension of %1$s does not indicate a text dict&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="137" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_sougou_dict_filename&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_sougou_dict_filename&quot;&gt;The filename extension of %1$s does not indicate a sogou dict&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="138" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_dict_filename&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_dict_filename&quot;&gt;The filename extension of %1$s does not indicate a dict&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="139" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_theme_json&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_theme_json&quot;&gt;Unable to find theme json&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="140" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_theme_name_clash&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_theme_name_clash&quot;&gt;Theme name clashes with builtin themes&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="141" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_theme_src_image&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_theme_src_image&quot;&gt;Unable to save source image of theme background&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="142" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_theme_cropped_image&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_theme_cropped_image&quot;&gt;Unable to save cropped image of theme background&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="143" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;follow_system_day_night_theme&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;follow_system_day_night_theme&quot;&gt;Follow system day/night theme&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="144" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;follow_system_day_night_theme_summary&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;follow_system_day_night_theme_summary&quot;&gt;Override manual theme selection&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="145" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;light_mode_theme&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;light_mode_theme&quot;&gt;Light mode theme&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="146" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;dark_mode_theme&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;dark_mode_theme&quot;&gt;Dark mode theme&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="147" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;new_theme&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;new_theme&quot;&gt;New theme&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="148" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;skip&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;skip&quot;&gt;Skip&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="149" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;horizontal_candidate_growth&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;horizontal_candidate_growth&quot;&gt;Stretch horizontal candidates to fill the remaining width&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="150" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;none&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;none&quot;&gt;None&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="151" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;theme_migrated&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;theme_migrated&quot;&gt;Theme has been migrated to the current version&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="152" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;keep_keyboard_letters_uppercase&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;keep_keyboard_letters_uppercase&quot;&gt;Keep keyboard letters uppercase&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="153" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;choose_input_method&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;choose_input_method&quot;&gt;Choose input method&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="154" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;edit_clipboard&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;edit_clipboard&quot;&gt;Edit clipboard&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="155" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_edit_text_hint&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;clipboard_edit_text_hint&quot;&gt;Clipboard content&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="156" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;config_addon_not_loaded&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;config_addon_not_loaded&quot;&gt;No configuration options available, maybe this addon is disabled when fcitx starts?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="157" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;portrait&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;portrait&quot;&gt;Portrait&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="158" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;landscape&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;landscape&quot;&gt;Landscape&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="159" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;keyboard_bottom_padding&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;keyboard_bottom_padding&quot;&gt;Keyboard bottom padding&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="160" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;keyboard_side_padding&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;keyboard_side_padding&quot;&gt;Keyboard side padding&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="161" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_suggestion&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clipboard_suggestion&quot;&gt;Show clipboard suggestions&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="162" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;disable_addon_warn_title&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;disable_addon_warn_title&quot;&gt;Disable Addon&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="163" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;disable_addon_warn_name&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;disable_addon_warn_name&quot;&gt;Disabling %1$s will also:&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="164" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;disable_addon_warn_dep&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;disable_addon_warn_dep&quot;&gt;Disable %1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="165" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;disable_addon_warn_optdep&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;disable_addon_warn_optdep&quot;&gt;Disable some features in %1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="166" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;disable_addon_warn_confirm&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;disable_addon_warn_confirm&quot;&gt;Are you sure you want to disable it?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="167" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;swipe_symbol_behavior&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;swipe_symbol_behavior&quot;&gt;Swipe to input punctuations and digits&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="168" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;swipe_down&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;swipe_down&quot;&gt;Swipe down&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="169" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;swipe_up&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;swipe_up&quot;&gt;Swipe up&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="170" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;disabled&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;disabled&quot;&gt;Disabled&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="171" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;system_default&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;system_default&quot;&gt;System default&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="172" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;editor_info_inspector&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;editor_info_inspector&quot;&gt;EditorInfo Inspector&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="173" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;default_&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;default_&quot;&gt;Default&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="174" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;saving&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;saving&quot;&gt;Saving&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="175" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;delete_all_pinned_items&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;delete_all_pinned_items&quot;&gt;Delete all pinned items?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="176" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;vivo_keypress_workaround&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;vivo_keypress_workaround&quot;&gt;vivo Origin OS keypress workaround&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="177" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;invalid_im&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;invalid_im&quot;&gt;Invalid input method configuration file:\n%1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="178" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;invalid_table_dict&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;invalid_table_dict&quot;&gt;Invalid dictionary:\n%1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="179" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_table_im&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_table_im&quot;&gt;Configuration file of table-based input method (.conf or .conf.in) not found&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="180" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_table&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_table&quot;&gt;Dictionary of table-based input method (.dict or .txt) not found&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="181" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_im&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;table_im&quot;&gt;Table-based Input Methods&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="182" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;manage_table_im&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;manage_table_im&quot;&gt;Manage Table-based Input Methods&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="183" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_table_im_filename&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_table_im_filename&quot;&gt;The extension of \&quot;%1$s\&quot; does not indicate a table input method package (.zip)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="184" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_already_exists&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;table_already_exists&quot;&gt;Configuration file of table-based input method \&quot;%1$s\&quot; already exists&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="185" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_file_does_not_exist_title&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;table_file_does_not_exist_title&quot;&gt;Table unavailable&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="186" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_file_does_not_exist_message&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;table_file_does_not_exist_message&quot;&gt;Dictionary of table-based input methods \&quot;%1$s\&quot; does not exist. Please check the dict file or re-import.&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="187" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;import_table&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;import_table&quot;&gt;Import Table&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="188" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_from_zip&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;table_from_zip&quot;&gt;From zip…&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="189" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_select_files&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;table_select_files&quot;&gt;From separate files…&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="190" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_file_placeholder&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;table_file_placeholder&quot;&gt;Select file…&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="191" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_conf_select_title&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;table_conf_select_title&quot;&gt;Input method configuration file (.conf or .conf.in)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="192" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_dict_select_title&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;table_dict_select_title&quot;&gt;Dictionary file (.dict or .txt)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="193" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_table_conf_filename&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_table_conf_filename&quot;&gt;The extension of \&quot;%1$s\&quot; does not indicate a configuration file of table-based input method (.conf or .conf.in)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="194" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_table_dict_filename&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_table_dict_filename&quot;&gt;The extension of \&quot;%1$s\&quot; does not indicate a dictionary file of table-based input method (.dict or .txt)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="195" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_table_import_both_files&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_table_import_both_files&quot;&gt;Please select both of above files to import&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="196" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;notification_permission_message&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;notification_permission_message&quot;&gt;Without the permission to post notifications, we are not able to notify you when some time-consuming operations are done.&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="197" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;notification_permission_title&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;notification_permission_title&quot;&gt;No Notification Permission&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="198" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;toolbar_num_row_on_password&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;toolbar_num_row_on_password&quot;&gt;Show number row on toolbar when inputting password&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="199" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;space_long_press_behavior&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;space_long_press_behavior&quot;&gt;Space key long press behavior&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="200" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;space_behavior_none&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;space_behavior_none&quot;&gt;None&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="201" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;space_behavior_enumerate&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;space_behavior_enumerate&quot;&gt;Enumerate input methods&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="202" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;space_behavior_activate&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;space_behavior_activate&quot;&gt;Toggle input method activate state&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="203" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;space_behavior_picker&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;space_behavior_picker&quot;&gt;Show input method picker dialog&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="204" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;show_lang_switch_key&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;show_lang_switch_key&quot;&gt;Show language switch key&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="205" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;horizontal_candidate_style&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;horizontal_candidate_style&quot;&gt;Horizontal candidate style&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="206" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;horizontal_candidate_never_fill&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;horizontal_candidate_never_fill&quot;&gt;Never fill width&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="207" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;horizontal_candidate_auto_fill&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;horizontal_candidate_auto_fill&quot;&gt;Fill width on demand&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="208" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;horizontal_candidate_always_fill&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;horizontal_candidate_always_fill&quot;&gt;Always fill width&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="209" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;inline_suggestions&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;inline_suggestions&quot;&gt;Show inline autofill suggestions&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="210" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;delete_all_except_pinned&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;delete_all_except_pinned&quot;&gt;Delete all items except pinned ones?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="211" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;num_items_deleted&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;num_items_deleted&quot;&gt;%1$d item(s) deleted&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="212" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;delete_theme&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;delete_theme&quot;&gt;Delete Theme&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="213" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;delete_theme_msg&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;delete_theme_msg&quot;&gt;Do you really want to delete theme \&quot;%1$s\&quot;?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="214" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;capture_heap_dump&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;capture_heap_dump&quot;&gt;Capture heap dump&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="215" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;plugins&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;plugins&quot;&gt;Plugins&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="216" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;plugins_loaded&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;plugins_loaded&quot;&gt;Loaded&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="217" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;plugins_failed&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;plugins_failed&quot;&gt;Load failed&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="218" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;missing_plugin_descriptor&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;missing_plugin_descriptor&quot;&gt;Missing plugin descriptor&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="219" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;invalid_plugin_descriptor&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;invalid_plugin_descriptor&quot;&gt;Invalid plugin descriptor&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="220" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;missing_data_descriptor&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;missing_data_descriptor&quot;&gt;Missing data descriptor&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="221" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;invalid_data_descriptor&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;invalid_data_descriptor&quot;&gt;Invalid data descriptor&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="222" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;incompatible_api&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;incompatible_api&quot;&gt;Incompatible API: %1$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="223" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;path_conflict&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;path_conflict&quot;&gt;Path \&quot;%1$s\&quot; is already owned by %2$s&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="224" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;main_program&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;main_program&quot;&gt;main program&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="225" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;edit_theme&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;edit_theme&quot;&gt;Edit Theme&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="226" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;show_voice_input_button&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;show_voice_input_button&quot;&gt;Show voice input button&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="227" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;fcitx_daemon&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;fcitx_daemon&quot;&gt;Fcitx Daemon&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="228" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;restarting_fcitx&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;restarting_fcitx&quot;&gt;Restarting Fcitx&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="229" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;plugin_needs_reload&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;plugin_needs_reload&quot;&gt;Plugin changes detected, click here to reload&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="230" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;no_plugins&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;no_plugins&quot;&gt;No plugins available&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="231" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;removed_n_items&quot; is not translated in &quot;ko&quot; (Korean) or &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;removed_n_items&quot;&gt;Removed %1$d item(s)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="232" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;whether_reset_switch_preference&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;whether_reset_switch_preference&quot;&gt;Would you like to reset this preference to default?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="233" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;enabled&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;enabled&quot;&gt;Enabled&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="234" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;following_system_settings&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;following_system_settings&quot;&gt;Follow system settings&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="235" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;button_sound&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;button_sound&quot;&gt;Sound on keypress&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="236" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;button_sound_volume&quot; is not translated in &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;button_sound_volume&quot;&gt;Keypress sound volume&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="237" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_return_after_paste&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clipboard_return_after_paste&quot;&gt;Return after pasting&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="238" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;theme_message_follow_system_day_night_mode_enabled&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;theme_message_follow_system_day_night_mode_enabled&quot;&gt;Cannot switch theme manually while \&quot;Follow system day/night mode\&quot; is enabled.&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="239" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;disable_it&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;disable_it&quot;&gt;Disable it&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="240" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;reset_keyboard_on_focus_change&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;reset_keyboard_on_focus_change&quot;&gt;Switch back to keyboard when the focus changes&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="241" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;export_user_data&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;export_user_data&quot;&gt;Export user data&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="242" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;import_user_data&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;import_user_data&quot;&gt;Import user data&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="243" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_user_data_filename&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_user_data_filename&quot;&gt;The filename extension of %1$s does not indicate fcitx5-android user data&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="244" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_user_data_metadata&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_user_data_metadata&quot;&gt;Unable to find metadata of user data&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="245" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;exception_user_data_package_name_mismatch&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;exception_user_data_package_name_mismatch&quot;&gt;User data does not match current application&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="246" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;user_data_imported&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;user_data_imported&quot;&gt;User data on %1$s has been imported, restarting…&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="247" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;confirm_import_user_data&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;confirm_import_user_data&quot;&gt;Import user data would override local settings and input history, and requires restarting the App for changes to take effect. Proceed?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="248" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;restart_channel&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;restart_channel&quot;&gt;App restart&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="249" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;restart_notify_msg&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;restart_notify_msg&quot;&gt;App has been restarted, click here to open&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="250" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;i_do_not_need_it&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;i_do_not_need_it&quot;&gt;I don\'t need it&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="251" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;grant_permission&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;grant_permission&quot;&gt;Grant permission&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="252" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clear_clp_db_confirm&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clear_clp_db_confirm&quot;&gt;Clipboard database would be completely cleared, including pinned items. Proceed?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="253" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;expand_keypress_area&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;expand_keypress_area&quot;&gt;Expand keypress area to the edge&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="254" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;update_table&quot; is not translated in &quot;de&quot; (German) or &quot;ko&quot; (Korean)" errorLine1="    &lt;string name=&quot;update_table&quot;&gt;Update table&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="255" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;table_dict_replace_message&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;table_dict_replace_message&quot;&gt;Dictionary of table-based input method \&quot;%1$s\&quot; exists. You may import a new dict and replace it.&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="256" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;lang_switch_key_behavior&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;lang_switch_key_behavior&quot;&gt;Language switch key behavior&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="257" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;lang_switch_behavior_next_ime_app&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;lang_switch_behavior_next_ime_app&quot;&gt;Switch to next input method App&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="258" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;cannot_be_empty&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;cannot_be_empty&quot;&gt;Cannot be empty&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="259" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;_cannot_be_empty&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;_cannot_be_empty&quot;&gt;%1$s cannot be empty&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="260" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;action_forget_candidate_word&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;action_forget_candidate_word&quot;&gt;Forget word&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="261" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;clipboard_mask_sensitive&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;clipboard_mask_sensitive&quot;&gt;Mask sensitive data (such as passwords)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="262" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;open_rime_user_data_dir&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;open_rime_user_data_dir&quot;&gt;Application data directory will be opened. RIME user data directory is located in \&quot;data/rime\&quot;.&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="263" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;restart_to_apply_settings&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;restart_to_apply_settings&quot;&gt;Application will restart to apply new settings. Proceed?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="264" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;space_swipe_move_cursor&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;space_swipe_move_cursor&quot;&gt;Swipe on space key to move cursor&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="265" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;please_wait&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;please_wait&quot;&gt;Please wait…&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="266" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;rotate&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;rotate&quot;&gt;Rotate&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="267" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;flip&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;flip&quot;&gt;Flip&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="268" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;flip_horizontally&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;flip_horizontally&quot;&gt;Flip horizontally&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="269" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;flip_vertically&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;flip_vertically&quot;&gt;Flip vertically&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="270" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;crop&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;crop&quot;&gt;Crop&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="271" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;candidates_window&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;candidates_window&quot;&gt;Candidates Window&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="272" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;show_candidates_window&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;show_candidates_window&quot;&gt;Show candidates window&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="273" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;candidates_window_radius&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;candidates_window_radius&quot;&gt;Candidates window radius&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="274" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;follow_input_device&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;follow_input_device&quot;&gt;Depends on input device&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="275" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;candidates_orientation&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;candidates_orientation&quot;&gt;Candidates list orientation&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="276" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;automatic&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;automatic&quot;&gt;Automatic&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="277" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;horizontal&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;horizontal&quot;&gt;Horizontal&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="278" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;vertical&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;vertical&quot;&gt;Vertical&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="279" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;candidates_font_size&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;candidates_font_size&quot;&gt;Candidate word font size&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="280" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;candidates_padding&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;candidates_padding&quot;&gt;Candidate word padding&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="281" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;candidates_window_min_width&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;candidates_window_min_width&quot;&gt;Candidate window minimum width&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="282" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;candidates_window_padding&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;candidates_window_padding&quot;&gt;Candidate window padding&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="283" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;restart_fcitx_instance&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;restart_fcitx_instance&quot;&gt;Restart fcitx instance&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="284" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;restart_fcitx_instance_confirm&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;restart_fcitx_instance_confirm&quot;&gt;Fcitx instance will be destroyed and reinitialized. Proceed?&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="285" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;ignore_system_window_insets&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;ignore_system_window_insets&quot;&gt;Ignore system WindowInsets&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="286" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;browse_user_data_dir&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;browse_user_data_dir&quot;&gt;Browse user data directory&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="287" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;haptic_on_repeat&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;haptic_on_repeat&quot;&gt;Haptic feedback on key repeat&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="288" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;redo&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;redo&quot;&gt;Redo&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="289" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;status_area&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;status_area&quot;&gt;Status area&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="290" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;expand_candidates_list&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;expand_candidates_list&quot;&gt;Expand candidates list&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="291" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;hide_candidates_list&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;hide_candidates_list&quot;&gt;Hide candidates list&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="292" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;switch_to_voice_input&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;switch_to_voice_input&quot;&gt;Switch to voice input&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="293" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;hide_keyboard&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;hide_keyboard&quot;&gt;Hide keyboard&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="294" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;private_mode&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;private_mode&quot;&gt;Private mode (tap to toggle toolbar)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="295" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;hide_toolbar&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;hide_toolbar&quot;&gt;Hide toolbar&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="296" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;expand_toolbar&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;expand_toolbar&quot;&gt;Expand toolbar&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="297" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;back_to_keyboard&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;back_to_keyboard&quot;&gt;Back to keyboard&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="298" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;backspace&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;backspace&quot;&gt;Backspace&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="299" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;move_cursor_up&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;move_cursor_up&quot;&gt;Move cursor up&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="300" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;move_cursor_right&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;move_cursor_right&quot;&gt;Move cursor right&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="301" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;move_cursor_down&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;move_cursor_down&quot;&gt;Move cursor down&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="302" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;move_cursor_left&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;move_cursor_left&quot;&gt;Move cursor left&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="303" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;move_cursor_to_start&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;move_cursor_to_start&quot;&gt;Move cursor to start&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="304" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;move_cursor_to_end&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;move_cursor_to_end&quot;&gt;Move cursor to end&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="305" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;open_input_method_settings&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;open_input_method_settings&quot;&gt;Open input method settings&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="306" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;delete_all&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;delete_all&quot;&gt;Delete all&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="307" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;share&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;share&quot;&gt;Share&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="308" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;emoji_and_symbols&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;emoji_and_symbols&quot;&gt;Emoji &amp;amp; Symbols&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="309" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;default_emoji_skin_tone&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;default_emoji_skin_tone&quot;&gt;Default emoji skin tone modifier&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="310" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;emoji_skin_tone_none&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;emoji_skin_tone_none&quot;&gt;No modifier&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="311" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;emoji_skin_tone_type_1_2&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;emoji_skin_tone_type_1_2&quot;&gt;🏻 Type-1-2&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="312" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;emoji_skin_tone_type_3&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;emoji_skin_tone_type_3&quot;&gt;🏼 Type-3&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="313" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;emoji_skin_tone_type_4&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;emoji_skin_tone_type_4&quot;&gt;🏽 Type-4&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="314" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;emoji_skin_tone_type_5&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;emoji_skin_tone_type_5&quot;&gt;🏾 Type-5&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="315" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;emoji_skin_tone_type_6&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;emoji_skin_tone_type_6&quot;&gt;🏿 Type-6&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="316" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;hide_unsupported_emojis&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;hide_unsupported_emojis&quot;&gt;Hide unsupported Emojis&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="317" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;key_border_stroke&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;key_border_stroke&quot;&gt;Enable stroke for key border&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="318" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;preferred_voice_input&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;preferred_voice_input&quot;&gt;Preferred voice input&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="319" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;edit_text_playground&quot; is not translated in &quot;de&quot; (German), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;edit_text_playground&quot;&gt;EditText Playground&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="320" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;keyboard_height_percent_base&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;keyboard_height_percent_base&quot;&gt;Keyboard height percent base&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="321" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;display_metrics&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;display_metrics&quot;&gt;Display metrics (Resources.getDisplayMetrics)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="322" column="13" />
+    </issue>
+    <issue id="MissingTranslation" message="&quot;real_size&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;ko&quot; (Korean), &quot;ja&quot; (Japanese), &quot;es&quot; (Spanish)" errorLine1="    &lt;string name=&quot;real_size&quot;&gt;Real size (Display.getRealSize)&lt;/string&gt;" errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location file="src/main/res/values/strings.xml" line="323" column="13" />
+    </issue>
+</issues>

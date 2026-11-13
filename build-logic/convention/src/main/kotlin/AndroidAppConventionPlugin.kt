@@ -122,6 +122,8 @@ class AndroidAppConventionPlugin : AndroidBaseConventionPlugin() {
                         tasks.findByName("merge${variantName}Assets")?.dependsOn(it)
                         tasks.findByName("lintVitalAnalyzeRelease")?.dependsOn(it)
                         tasks.findByName("generateReleaseLintVitalReportModel")?.dependsOn(it)
+                        tasks.findByName("generate${variantName}LintReportModel")?.dependsOn(it)
+                        tasks.findByName("lintAnalyze${variantName}")?.dependsOn(it)
                     }
                 }
             }
