@@ -87,6 +87,20 @@ open class CustomGestureView(ctx: Context) : FrameLayout(ctx) {
     var onRepeatListener: ((View) -> Unit)? = null
     var onGestureListener: OnGestureListener? = null
 
+    /** A consumed long press ends on release, cancellation, or view removal. */
+    var onLongPressEnd: ((cancelled: Boolean) -> Unit)? = null
+
+    private fun endLongPress(cancelled: Boolean) {
+        if (longPressTriggered) {
+            onLongPressEnd?.invoke(cancelled)
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        cancelGestures()
+        super.onDetachedFromWindow()
+    }
+
     var soundEffect: InputFeedbacks.SoundEffect = InputFeedbacks.SoundEffect.Standard
 
     private val touchSlop: Float = ViewConfiguration.get(ctx).scaledTouchSlop.toFloat()
@@ -137,6 +151,7 @@ open class CustomGestureView(ctx: Context) : FrameLayout(ctx) {
     }
 
     fun cancelGestures() {
+        endLongPress(cancelled = true)
         isPressed = false
         resetState()
         // reset double tap state on cancel
@@ -188,6 +203,7 @@ open class CustomGestureView(ctx: Context) : FrameLayout(ctx) {
                 }
             }
             MotionEvent.ACTION_UP -> {
+                endLongPress(cancelled = false)
                 isPressed = false
                 InputFeedbacks.hapticFeedback(this, longPress = true, keyUp = true)
                 dispatchGestureEvent(GestureType.Up, event.x, event.y)

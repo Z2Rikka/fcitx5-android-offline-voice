@@ -202,6 +202,10 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         return job
     }
 
+    val offlineVoice by lazy {
+        org.fcitx.fcitx5.android.input.voice.OfflineVoiceInput(this)
+    }
+
     override fun onCreate() {
         fcitx = FcitxDaemon.connect(javaClass.name)
         lifecycleScope.launch {
@@ -725,6 +729,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     }
 
     override fun onStartInput(attribute: EditorInfo, restarting: Boolean) {
+        offlineVoice.editorChanged()
         // update selection as soon as possible
         // sometimes when restarting input, onUpdateSelection happens before onStartInput, and
         // initialSel{Start,End} is outdated. but it's the client app's responsibility to send
@@ -756,6 +761,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     }
 
     override fun onStartInputView(info: EditorInfo, restarting: Boolean) {
+        offlineVoice.prepare()
         Timber.d("onStartInputView: restarting=$restarting")
         postFcitxJob {
             focus(true)
@@ -1048,6 +1054,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     }
 
     override fun onFinishInputView(finishingInput: Boolean) {
+        offlineVoice.editorChanged()
         Timber.d("onFinishInputView: finishingInput=$finishingInput")
         decorLocationUpdated = false
         inputDeviceMgr.onFinishInputView()
@@ -1064,6 +1071,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     }
 
     override fun onFinishInput() {
+        offlineVoice.editorChanged()
         Timber.d("onFinishInput")
         postFcitxJob {
             focus(false)
@@ -1084,6 +1092,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     }
 
     override fun onDestroy() {
+        offlineVoice.close()
         recreateInputViewPrefs.forEach {
             it.unregisterOnChangeListener(recreateInputViewListener)
         }

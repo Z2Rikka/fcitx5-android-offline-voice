@@ -152,6 +152,11 @@ abstract class BaseKeyboard(
                 else -> InputFeedbacks.SoundEffect.Standard
             }
             if (def is SpaceKey) {
+                onLongPressEnd = { cancelled ->
+                    if (prefs.keyboard.spaceKeyLongPressBehavior.getValue() == SpaceLongPressBehavior.OfflineVoice) {
+                        onAction(if (cancelled) KeyAction.VoiceCancelAction else KeyAction.VoiceReleaseAction)
+                    }
+                }
                 spaceKeys.add(this)
                 swipeEnabled = spaceSwipeMoveCursor.getValue()
                 swipeRepeatEnabled = true
