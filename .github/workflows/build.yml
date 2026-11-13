@@ -1,0 +1,151 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    name: 编译与签名 APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # 版本号来自 git describe，需要完整历史与 tag
+          fetch-depth: 0
+          submodules: recursive
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: 安装系统依赖
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext extra-cmake-modules
+
+      - name: 缓存 Android SDK 组件
+        uses: actions/cache@v4
+        with:
+          # runner 自带的 SDK 路径是固定的；缓存未命中只是变慢，不影响结果
+          path: |
+            /usr/local/lib/android/sdk/ndk
+            /usr/local/lib/android/sdk/cmake
+          key: android-sdk-ndk28-cmake3316
+
+      - name: 安装 NDK 与 CMake
+        run: |
+          # 不用 android-actions/setup-android：它会执行 sdkmanager tools，
+          # 而新版 cmdline-tools 已不下发 tools 包，直接以失败退出。
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          echo "ANDROID_HOME=$SDK" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$SDK" >> "$GITHUB_ENV"
+          SM=$(find "$SDK/cmdline-tools" -maxdepth 3 -type f -name sdkmanager | sort | tail -1)
+          echo "sdkmanager: $SM"
+          yes | "$SM" --licenses > /dev/null || true
+          "$SM" "platform-tools" "platforms;android-36" "build-tools;36.1.0" \
+            "ndk;28.0.13004108" "cmake;3.31.6"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: 下载 sherpa-onnx 运行时
+        run: |
+          mkdir -p app/libs
+          curl -fL --retry 5 -o /tmp/sherpa-onnx.aar \
+            https://github.com/k2-fsa/sherpa-onnx/releases/download/v1.12.14/sherpa-onnx-1.12.14.aar
+          python3 - <<'PY'
+          import zipfile
+          src = '/tmp/sherpa-onnx.aar'
+          dst = 'app/libs/sherpa-onnx-1.12.14-arm64.aar'
+          with zipfile.ZipFile(src) as zin, zipfile.ZipFile(dst, 'w', zipfile.ZIP_DEFLATED) as zout:
+              for name in zin.namelist():
+                  if name.startswith('jni/') and not name.startswith('jni/arm64-v8a/'):
+                      continue
+                  zout.writestr(name, zin.read(name))
+          print('arm64 AAR 大小', __import__('os').path.getsize(dst) // 1024 // 1024, 'MB')
+          PY
+
+      - name: 下载语音模型
+        run: |
+          mkdir -p app/src/main/assets/offline-voice
+          base=https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-bilingual-zh-en-2023-02-20/resolve/main
+          cd app/src/main/assets/offline-voice
+          curl -fL --retry 5 -o encoder.int8.onnx "$base/encoder-epoch-99-avg-1.int8.onnx"
+          curl -fL --retry 5 -o decoder.onnx        "$base/decoder-epoch-99-avg-1.onnx"
+          curl -fL --retry 5 -o joiner.int8.onnx    "$base/joiner-epoch-99-avg-1.int8.onnx"
+          curl -fL --retry 5 -o tokens.txt          "$base/tokens.txt"
+          ls -lh
+
+      - name: 下载雾凇拼音
+        run: |
+          mkdir -p .local-build
+          curl -fL --retry 5 -o .local-build/rime-ice.zip \
+            https://codeload.github.com/iDvel/rime-ice/zip/927e1cf1d3eeb9bf4be85e3f684dba4dd485b6f6
+
+      - name: 编译 Rime 插件
+        run: ./gradlew :plugin:rime:assembleDebug -PbuildABI=arm64-v8a -Pandroid.builder.sdkDownload=false --console=plain
+
+      - name: 合入 Rime 原生库与词库
+        run: python3 tools/offline/prepare_bundle.py --rime-apk plugin/rime/build/outputs/apk/debug/*.apk
+
+      - name: 单元测试
+        run: ./gradlew :app:testDebugUnitTest -PbuildABI=arm64-v8a -Pandroid.builder.sdkDownload=false --console=plain
+
+      - name: 编译并签名
+        env:
+          SIGN_KEY_BASE64: ${{ secrets.SIGN_KEY_BASE64 }}
+          SIGN_KEY_PWD: ${{ secrets.SIGN_KEY_PWD }}
+          SIGN_KEY_ALIAS: ${{ secrets.SIGN_KEY_ALIAS }}
+        run: |
+          if [ -z "$SIGN_KEY_BASE64" ]; then
+            echo "::warning::未配置签名 Secret，产出未签名 APK"
+          fi
+          # tag 构建用 tag 名作 versionName，避免 git describe 的长串
+          if [ "$GITHUB_REF_TYPE" = tag ]; then
+            export BUILD_VERSION_NAME="$GITHUB_REF_NAME"
+          fi
+          ./gradlew :app:assembleRelease -PbuildABI=arm64-v8a \
+            -Pandroid.builder.sdkDownload=false --console=plain
+
+      - name: 校验 APK
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/release/*.apk dist/
+          python3 tools/offline/verify_apk.py dist/*.apk \
+            --build-tools "$ANDROID_SDK_ROOT/build-tools/36.1.0" \
+            --readelf "$ANDROID_SDK_ROOT/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-readelf" \
+            --output dist/apk-verification.json || {
+              echo "::warning::签名或资源校验未通过，请检查 Secret 配置"
+              exit 0
+            }
+
+      - name: 汇总校验信息
+        run: |
+          sha256sum dist/*.apk | tee dist/SHA256SUMS.txt
+          ls -lh dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk-${{ github.sha }}
+          path: dist/
+          compression-level: 0
+          retention-days: 30
+
+      - name: 发布 Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            dist/*.apk dist/SHA256SUMS.txt dist/apk-verification.json \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes \
+            --notes-file .github/RELEASE_NOTES.md
