@@ -177,6 +177,16 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
         )
         val spaceSwipeMoveCursor =
             switch(R.string.space_swipe_move_cursor, "space_swipe_move_cursor", true)
+        val voiceSilenceTimeout = int(
+            R.string.voice_silence_timeout,
+            "voice_silence_timeout",
+            900,
+            300,
+            2000,
+            "ms",
+            100,
+            enableUiOn = { spaceKeyLongPressBehavior.getValue() == SpaceLongPressBehavior.OfflineVoice }
+        )
         val showLangSwitchKey =
             switch(R.string.show_lang_switch_key, "show_lang_switch_key", true)
         val langSwitchKeyBehavior = enumList(

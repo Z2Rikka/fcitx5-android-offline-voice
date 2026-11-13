@@ -157,6 +157,17 @@ abstract class BaseKeyboard(
                         onAction(if (cancelled) KeyAction.VoiceCancelAction else KeyAction.VoiceReleaseAction)
                     }
                 }
+                // Swiping up while holding cancels the dictation instead of inserting it.
+                var pressY = Float.NaN
+                var dragCancelled = false
+                val cancelThreshold = dp(56f)
+                onLongPressDrag = { _, y ->
+                    if (!dragCancelled && !pressY.isNaN() && y - pressY < -cancelThreshold) {
+                        dragCancelled = true
+                        onAction(KeyAction.VoiceCancelAction)
+                        InputFeedbacks.hapticFeedback(this)
+                    }
+                }
                 spaceKeys.add(this)
                 swipeEnabled = spaceSwipeMoveCursor.getValue()
                 swipeRepeatEnabled = true
@@ -164,6 +175,16 @@ abstract class BaseKeyboard(
                 swipeThresholdY = disabledSwipeThreshold
                 onGestureListener = OnGestureListener { view, event ->
                     when (event.type) {
+                        GestureType.Down -> {
+                            pressY = event.y
+                            dragCancelled = false
+                            false
+                        }
+                        GestureType.Up -> {
+                            pressY = Float.NaN
+                            dragCancelled = false
+                            false
+                        }
                         GestureType.Move -> when (val count = event.countX) {
                             0 -> false
                             else -> {

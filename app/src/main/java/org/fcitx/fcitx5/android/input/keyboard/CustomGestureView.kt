@@ -87,6 +87,13 @@ open class CustomGestureView(ctx: Context) : FrameLayout(ctx) {
     var onRepeatListener: ((View) -> Unit)? = null
     var onGestureListener: OnGestureListener? = null
 
+    /**
+     * Called on every move while a long press is being held, including after the
+     * pointer leaves the key. Normal gesture dispatch stops once the long press
+     * fires, so drag-to-cancel needs its own hook.
+     */
+    var onLongPressDrag: ((x: Float, y: Float) -> Unit)? = null
+
     /** A consumed long press ends on release, cancellation, or view removal. */
     var onLongPressEnd: ((cancelled: Boolean) -> Unit)? = null
 
@@ -247,7 +254,10 @@ open class CustomGestureView(ctx: Context) : FrameLayout(ctx) {
                         isPressed = false
                     }
                 }
-                if (!swipeEnabled || longPressTriggered || repeatStarted) return true
+                if (!swipeEnabled || longPressTriggered || repeatStarted) {
+                    if (longPressTriggered) onLongPressDrag?.invoke(x, y)
+                    return true
+                }
                 val countX = consumeSwipe(x, SwipeAxis.X)
                 val countY = consumeSwipe(y, SwipeAxis.Y)
                 dispatchGestureEvent(GestureType.Move, x, y, countX, countY)

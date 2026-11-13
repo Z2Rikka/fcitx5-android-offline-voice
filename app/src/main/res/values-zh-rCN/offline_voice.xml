@@ -7,5 +7,9 @@
     <string name="offline_voice_failed">离线识别失败，请检查麦克风权限后重试。单次录音最长 60 秒。</string>
     <string name="offline_voice_empty">没有识别到语音。请按住空格，出现聆听提示后再说话。</string>
     <string name="offline_voice_password">密码输入框不启用语音输入。</string>
+    <string name="offline_voice_error_microphone">麦克风不可用。可能有其他应用在录音，或可在设置中换个音频源再试。</string>
+    <string name="offline_voice_error_model">离线模型加载失败，若反复出现请重装应用。</string>
+    <string name="offline_voice_error_recognition">识别出错，重新按住空格再试。</string>
+    <string name="voice_silence_timeout">停顿多久结束录音</string>
     <string name="offline_voice_permission_retry">允许麦克风权限后，请返回输入框，重新按住空格说话。</string>
 </resources>

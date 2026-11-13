@@ -8,5 +8,9 @@
     <string name="offline_voice_failed">Offline recognition failed. Check microphone access and try again. Recording is limited to 60 seconds.</string>
     <string name="offline_voice_empty">No speech recognized. Hold space, wait for the listening prompt, then speak.</string>
     <string name="offline_voice_password">Voice input is disabled in password fields.</string>
+    <string name="offline_voice_error_microphone">Microphone unavailable. Another app may be recording, or try a different audio source in settings.</string>
+    <string name="offline_voice_error_model">Failed to load the offline model. Reinstall the app if this persists.</string>
+    <string name="offline_voice_error_recognition">Recognition failed. Hold space again to retry.</string>
+    <string name="voice_silence_timeout">End after silence</string>
     <string name="offline_voice_permission_retry">After allowing microphone access, return to the input field and hold space again.</string>
 </resources>
