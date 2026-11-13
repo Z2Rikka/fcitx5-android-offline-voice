@@ -1,162 +1,100 @@
-# fcitx5-android
+# Fcitx5 for Android · 离线语音版
 
-[Fcitx5](https://github.com/fcitx/fcitx5) input method framework and engines ported to Android.
+基于上游 [fcitx5-android](https://github.com/fcitx5-android/fcitx5-android) 的个人修改版：加入**纯端侧的中英双语语音输入**，并内置 [雾凇拼音](https://github.com/iDvel/rime-ice)，开箱即用。
 
-## Download
+**按住空格说话，松手或停顿后出字，全程不联网。**
 
-[<img src="https://github.com/rubenpgrady/get-it-on-github/raw/refs/heads/main/get-it-on-github.png" alt="Git it on GitHub" width="207" height="80">](https://github.com/fcitx5-android/fcitx5-android/releases/latest)
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" width="207" height="80">](https://f-droid.org/packages/org.fcitx.fcitx5.android)
-[<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width="207" height="80">](https://play.google.com/store/apps/details?id=org.fcitx.fcitx5.android)
+## 特性
 
-You can also download the **latest CI build** on our Jeninks server: [![build status](https://img.shields.io/jenkins/build.svg?jobUrl=https://jenkins.fcitx-im.org/job/android/job/fcitx5-android/)](https://jenkins.fcitx-im.org/job/android/job/fcitx5-android/)
+| 功能 | 说明 |
+|---|---|
+| 长按空格语音 | 轻点空格照常输入空格；按住约 300ms 进入聆听，松手出字 |
+| 完全离线 | 模型随包内置，运行时不需要网络，应用未声明 `INTERNET` 权限 |
+| 中英混说 | 流式 Zipformer 双语模型，边说边解码，松手后只补尾部音频 |
+| 静音自动结束 | 说完停顿自动收尾，时长可在 300-2000ms 间调整 |
+| 上滑取消 | 长按中向上滑出即可放弃这次录音 |
+| 重说 | 结果未被修改时再按住空格，会撤回上次文字重新录音 |
+| 中文数字规范化 | `二零一一年` → `2011年`、`十五米` → `15米`、`百分之五十` → `50%` |
+| 内置雾凇拼音 | 首次启动自动部署，默认全拼方案，词库包含 Lua、OpenCC 与英文词库 |
+| 隐私 | 录音只在内存中处理，不写音频文件；密码框禁用语音 |
 
-> [!NOTE]
-> APKs downloaded from GitHub Release/F-Droid/Jenkins have the same signature, which means they're compatible when upgrading, but Google Play's do not.
-> <details>
-> <summary>(click here for detailed signature info)</summary>
-> <ul>
-> <li>Package Name: <code>org.fcitx.fcitx5.android</code></li>
-> <li>Certificate SHA-256 fingerprint:</li>
-> <ul>
-> <li>GitHub Release/Jenkins/F-Droid</li>
-> <code>E4:DB:1E:9E:DF:F1:36:29:D0:7D:E4:BB:F8:16:5F:E9:BD:85:57:AB:55:09:26:72:DA:8E:40:DB:E4:84:EC:D7</code>
-> <li>Google Play</li>
-> <code>06:53:6F:F6:E8:76:C0:14:E1:4B:44:6F:61:FA:2B:80:9E:06:67:39:A1:D1:17:0D:0A:7A:89:88:4C:48:00:33</code>
-> </ul>
-> </ul>
-> </details>
+## 与官方版的差异
 
-In case you want Fcitx5 on other platforms: [macOS](https://github.com/fcitx-contrib/fcitx5-macos), [iOS](https://github.com/fcitx-contrib/fcitx5-ios), [HarmonyOS](https://github.com/fcitx-contrib/fcitx5-harmony), [ChromeOS](https://github.com/fcitx-contrib/fcitx5-chrome), [Windows](https://github.com/fcitx-contrib/fcitx5-windows); or [try Fcitx5 in the browser](https://fcitx-contrib.github.io/online/index.html)
+这些都是刻意的改动，请不要当成上游缺陷：
 
-## Project status
+- 应用 ID 为 `org.fcitx.fcitx5.android.offline`，可与官方版**并存**，使用独立的配置与词库目录。原版数据不会被读取或覆盖。
+- 长按空格的默认行为改为语音输入。如需原行为，在“设置 → 键盘 → 空格键长按行为”中改回。
+- 内置一份雾凇拼音；原版的个人词库、主题与自定义配置**不会自动迁移**。
+- 只打包 `arm64-v8a`，只为减小体积，不支持 32 位设备。
+- APK 体积约 285 MB，其中语音模型约 190 MB。
 
-### Supported Languages
+## 使用
 
-- English (with spell check)
-- Chinese
-  - Pinyin, Shuangpin, Wubi, Cangjie and custom tables (built-in, powered by [fcitx5-chinese-addons](https://github.com/fcitx/fcitx5-chinese-addons))
-  - Zhuyin/Bopomofo (via [Chewing Plugin](./plugin/chewing))
-  - Jyutping (via [Jyutping Plugin](./plugin/jyutping/), powered by [libime-jyutping](https://github.com/fcitx/libime-jyutping))
-- Vietnamese (via [UniKey Plugin](./plugin/unikey), supports Telex, VNI and VIQR)
-- Japanese (via [Anthy Plugin](./plugin/anthy))
-- Korean (via [Hangul Plugin](./plugin/hangul))
-- Sinhala (via [Sayura Plugin](./plugin/sayura))
-- Thai (via [Thai Plugin](./plugin/thai))
-- Generic (via [RIME Plugin](./plugin/rime), supports importing custom schemas)
+1. 安装 APK，打开“Fcitx5 离线语音”，按引导启用并切换到该输入法。
+2. 首次启动会部署雾凇词库，等待部署完成。
+3. 首次长按空格会申请麦克风权限；允许后返回输入框，再次按住空格。
+4. 看到“正在聆听”后说话，松手或停顿即可上屏。
+5. 可以在飞行模式下验证完整流程。
 
-### Implemented Features
+## 构建
 
-- Virtual Keyboard (layout not customizable yet)
-- Expandable candidate view
-- Clipboard management (plain text only)
-- Theming (custom color scheme, background image and dynamic color aka monet color after Android 12)
-- Popup preview on key press
-- Long press popup keyboard for convenient symbol input
-- Symbol and Emoji picker
-- Plugin System for loading addons from other installed apk
-- Floating candidates panel when using physical keyboard
+依赖与上游一致：JDK 21、Android SDK 36、NDK 28、CMake 3.31.6，以及 `gettext`、`extra-cmake-modules`。
 
-### Planned Features
+模型、词库与 sherpa-onnx 的 AAR **不入库**，需要按 [`tools/offline/README.md`](tools/offline/README.md) 准备好：
 
-- Customizable keyboard layout
-- More input methods (via plugin)
+- `app/libs/sherpa-onnx-1.12.14-arm64.aar`
+- `app/src/main/assets/offline-voice/`（encoder/decoder/joiner/tokens）
+- `.local-build/rime-ice.zip`（固定提交）
 
-## Screenshots
+然后：
 
-|拼音, Material Light theme, key border enabled|自然码双拼, Pixel Dark theme, key border disabled|
-|:-:|:-:|
-|<img src="https://github.com/fcitx5-android/fcitx5-android/assets/13914967/bd429247-62d9-4c78-bab8-70ef3ce47588" width="360px">|<img src="https://github.com/fcitx5-android/fcitx5-android/assets/13914967/3ae969c1-7ed0-4f92-a5df-19dc8c90a8c3" width="360px">|
-
-|Emoji picker, Pixel Light theme, key border enabled|Symbol picker, Material Dark theme, key border disabled|
-|:-:|:-:|
-|<img src="https://user-images.githubusercontent.com/13914967/202181845-6a5f6bb2-a877-468c-851a-fd7e66e64ed4.png" width="360px">|<img src="https://user-images.githubusercontent.com/13914967/202181861-dd253439-1d5e-4f5f-9535-934f28796a6b.png" width="360px">|
-
-## Get involved
-
-Trello kanban: https://trello.com/b/gftk6ZdV/kanban
-
-Matrix Room: https://matrix.to/#/#fcitx5-android:mozilla.org
-
-Discuss on Telegram: [@fcitx5_android_group](https://t.me/fcitx5_android_group) ([@fcitx5_android](https://t.me/fcitx5_android) originally)
-
-## Build
-
-### Dependencies
-
-- Android SDK Platform & Build-Tools 35.
-- Android NDK (Side by side) 25 & CMake 3.22.1, they can be installed using SDK Manager in Android Studio or `sdkmanager` command line.
-- [KDE/extra-cmake-modules](https://github.com/KDE/extra-cmake-modules)
-- GNU Gettext >= 0.20 (for `msgfmt` binary; or install `appstream` if you really have to use gettext <= 0.19.)
-
-### How to set up development environment
-
-<details>
-<summary>Prerequisites for Windows</summary>
-
-- Enable [Developer Mode](https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development) so that symlinks can be created without administrator privilege.
-
-- Enable symlink support for `git`:
-
-    ```shell
-    git config --global core.symlinks true
-    ```
-
-</details>
-
-First, clone this repository and fetch all submodules:
-
-```shell
-git clone git@github.com:fcitx5-android/fcitx5-android.git
+```sh
 git submodule update --init --recursive
+
+# 1. 构建 Rime 插件，取出原生库与资源并合入主程序
+./gradlew :plugin:rime:assembleDebug -PbuildABI=arm64-v8a
+python tools/offline/prepare_bundle.py --rime-apk plugin/rime/build/outputs/apk/debug/*.apk
+
+# 2. 构建主程序
+./gradlew :app:assembleRelease :app:testDebugUnitTest -PbuildABI=arm64-v8a
+python tools/offline/verify_apk.py app/build/outputs/apk/release/*.apk \
+  --build-tools "$ANDROID_HOME/build-tools/36.1.0" \
+  --readelf "$ANDROID_HOME/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-readelf" \
+  --output dist/apk-verification.json
 ```
 
-Install `extra-cmake-modules` and `gettext` with your system package manager:
+`tools/offline/` 下另有 `validate_model.py`（用上游 WAV 校验模型与上屏文本）和构建说明。
 
-```shell
-# For Arch Linux (Arch has gettext in it's base meta package)
-sudo pacman -S extra-cmake-modules
+## 持续集成与签名
 
-# For Debian/Ubuntu
-sudo apt install extra-cmake-modules gettext
+[`.github/workflows/build.yml`](.github/workflows/build.yml) 在每次推送和手动触发时自动下载模型与依赖、编译、跑单元测试、签名并上传 APK。
 
-# For macOS
-brew install extra-cmake-modules gettext
+签名材料**不进仓库**，通过仓库 Secret 注入（构建脚本读取环境变量）：
 
-# For Windows, install MSYS2 and execute in its shell (UCRT64)
-pacman -S mingw-w64-ucrt-x86_64-extra-cmake-modules mingw-w64-ucrt-x86_64-gettext
-# then add C:\msys64\ucrt64\bin to PATH
-```
+| Secret | 内容 |
+|---|---|
+| `SIGN_KEY_BASE64` | PKCS12/JKS 密钥库的 base64 |
+| `SIGN_KEY_PWD` | 密钥库密码 |
+| `SIGN_KEY_ALIAS` | 密钥别名 |
 
-Install Android SDK Platform, Android SDK Build-Tools, Android NDK and cmake via SDK Manager in Android Studio:
+没有配置这些 Secret 时，构建仍会产出**未签名**的 APK 供检查，但无法直接安装升级。
 
-<details>
-<summary>Detailed steps (screenshots)</summary>
+> 同一个包名必须始终用同一份密钥签名，否则只能卸载重装、数据丢失。请自行备份密钥库。
 
-**Note:** These screenshots are for references and the versions in them may be out of date.
-The current recommended versions are recorded in [Versions.kt](build-logic/convention/src/main/kotlin/Versions.kt) file.
+## 数据与许可
 
-![Open SDK Manager](https://user-images.githubusercontent.com/13914967/202184493-3ee1546b-0a83-4cc9-9e41-d20b0904a0cf.png)
+本项目是上游项目的修改版，遵循 **LGPL-2.1-or-later**，修改部分的版权归本仓库贡献者；上游版权归 fcitx5-android 贡献者。
 
-![Install SDK Platform](https://user-images.githubusercontent.com/13914967/202184534-340a9e7c-7c42-49bd-9cf5-1ec9dcafcf32.png)
+- [fcitx5-android](https://github.com/fcitx5-android/fcitx5-android) — 主程序与插件框架（LGPL-2.1-or-later）
+- [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) v1.12.14 — 端侧推理运行时（Apache-2.0）
+- [onnxruntime](https://github.com/microsoft/onnxruntime) — 推理后端（MIT）
+- [sherpa-onnx-streaming-zipformer-bilingual-zh-en-2023-02-20](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-bilingual-zh-en-2023-02-20) — 中英双语流式模型（Apache-2.0）
+- [rime-ice 雾凇拼音](https://github.com/iDvel/rime-ice) — 输入方案与词库（Apache-2.0）
+- 许可证全文随包放在 `app/src/main/assets/offline-notices/`
 
-![Install SDK Build-Tools](https://user-images.githubusercontent.com/13914967/202185945-0c7a9f39-1fcc-4018-9c81-b3d2bf1c2d3f.png)
+## 已知限制
 
-![Install NDK](https://user-images.githubusercontent.com/13914967/202185601-0cf877ea-e148-4b88-bd2f-70533189b3d4.png)
-
-![Install CMake](https://user-images.githubusercontent.com/13914967/202184655-3c1ab47c-432f-4bd7-a508-92096482de50.png)
-
-</details>
-
-### Trouble-shooting
-
-- Android Studio indexing takes forever to complete and cosumes a lot of memory.
-
-    Switch to "Project" view in the "Project" tool window (namely the file tree side bar), right click `lib/fcitx5/src/main/cpp/prebuilt` directory, then select "Mark Directory as > Excluded". You may also need to restart the IDE to interrupt ongoing indexing process.
-
-- Gradle error: "No variants found for ':app'. Check build files to ensure at least one variant exists." or "[CXX1210] <whatever>/CMakeLists.txt debug|arm64-v8a : No compatible library found"
-
-    Examine if there are environment variables set such as `_JAVA_OPTIONS` or `JAVA_TOOL_OPTIONS`. You might want to clear them (maybe in the startup script `studio.sh` of Android Studio), as some gradle plugin treats anything in stderr as errors and aborts.
-
-## Nix
-
-Appropriate Android SDK with NDK is available in the development shell.  The `gradlew` should work out-of-the-box, so you can install the app to your phone with `./gradlew installDebug` after applying the patch mentioned above. For development, you may want to install the unstable version of Android Studio, and point the project SDK path to `$ANDROID_SDK_ROOT` defined in the shell. Notice that Android Studio may generate wrong `local.properties` which sets the SDK location to `~/Android/SDK` (installed by SDK Manager). In such case, you need specify `sdk.dir` as the project SDK in that file manually, in case Android Studio sticks to the wrong global SDK.
+- 语音模型的数字、专名和缩写仍有错误率；识别结果不带标点，暂未接标点恢复模型。
+- 中文数字规范化刻意保守：`一点二亿` 这类“小数 + 万亿”保持原样，`一点小事` 不会被改写。
+- 静音阈值基于信号能量，个别机型麦克风增益偏大时需要调 `EnergyVad` 的参数。
+- 尚未在真机上完成麦克风、手势与耗时验证。
