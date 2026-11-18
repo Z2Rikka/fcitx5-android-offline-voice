@@ -29,10 +29,18 @@ class RimeDictManager(private val context: Context) {
         val id: String,
         val name: String,
         val schema: String,
-        val files: List<String>
+        val files: List<String>,
+        /** Files that already existed before installing; their originals live in `<id>.bak/`. */
+        val backups: List<String> = emptyList()
     )
 
-    data class InstalledDict(val id: String, val name: String, val schema: String, val files: List<String>)
+    data class InstalledDict(
+        val id: String,
+        val name: String,
+        val schema: String,
+        val files: List<String>,
+        val backups: List<String> = emptyList()
+    )
 
     /** A scheme (`*.schema.yaml`) that exists on disk and can be enabled. */
     data class Scheme(val id: String, val name: String)
@@ -44,6 +52,9 @@ class RimeDictManager(private val context: Context) {
 
     private val customFile: File get() = File(rimeDir, "default.custom.yaml")
     private val manifestDir: File get() = File(rimeDir, MANIFEST_DIR)
+
+    /** Originals of files that a download overwrote, so uninstalling can put them back. */
+    private fun backupDir(id: String) = File(manifestDir, "$id.bak")
 
     fun stagingDir(id: String): File = File(rimeDir, ".download-$id")
 
@@ -63,7 +74,7 @@ class RimeDictManager(private val context: Context) {
         return files.sortedBy { it.name }.mapNotNull { file ->
             runCatching {
                 val m = json.decodeFromString<Manifest>(file.readText())
-                InstalledDict(m.id, m.name, m.schema, m.files)
+                InstalledDict(m.id, m.name, m.schema, m.files, m.backups)
             }.onFailure { Timber.w(it, "RimeDictManager: broken manifest %s", file.name) }
                 .getOrNull()
         }
@@ -146,41 +157,72 @@ class RimeDictManager(private val context: Context) {
      */
     fun install(entry: CatalogEntry, staging: File): Result<InstalledDict> = runCatching {
         check(staging.isDirectory) { "下载目录不存在" }
+        // re-installing: restore what we overwrote last time, so the backup stays the original one
+        if (isInstalled(entry.id)) uninstall(entry.id)
         val files = staging.walkTopDown().filter { it.isFile }.map { it.relativeTo(staging).path }.toList()
         check(files.isNotEmpty()) { "下载内容为空" }
         val target = rimeDir.apply { mkdirs() }
+        val backups = mutableListOf<String>()
+        val backup = backupDir(entry.id)
         files.forEach { relative ->
             val src = File(staging, relative)
             val dst = File(target, relative)
             dst.parentFile?.mkdirs()
+            if (dst.isFile) {
+                // keep the file that shipped with the app (or the user's own copy)
+                val saved = File(backup, relative)
+                saved.parentFile?.mkdirs()
+                dst.copyTo(saved, overwrite = true)
+                backups += relative
+            }
             src.copyTo(dst, overwrite = true)
         }
         val installed = InstalledDict(
             id = entry.id,
             name = entry.name.ifBlank { entry.id },
             schema = entry.schema,
-            files = files
+            files = files,
+            backups = backups
         )
         File(manifestDir, entry.id + ".json").apply {
             parentFile?.mkdirs()
-            writeText(json.encodeToString(Manifest(installed.id, installed.name, installed.schema, installed.files)))
+            writeText(
+                json.encodeToString(
+                    Manifest(installed.id, installed.name, installed.schema, installed.files, backups)
+                )
+            )
         }
         staging.deleteRecursively()
-        if (entry.schema.isNotBlank()) activate(entry.schema)
-        Timber.i("RimeDictManager: installed %s (%d files)", entry.id, files.size)
+        // only switch when the file that defines the scheme really landed on disk
+        if (entry.schema.isNotBlank() && File(target, entry.schema + ".schema.yaml").isFile) {
+            activate(entry.schema)
+        }
+        Timber.i("RimeDictManager: installed %s (%d files, %d backups)", entry.id, files.size, backups.size)
         installed
     }.onFailure {
         Timber.w(it, "RimeDictManager: install(%s) failed", entry.id)
         staging.deleteRecursively()
     }
 
-    /** Delete the files that [install] created and disable the scheme (if any). */
+    /**
+     * Delete the files that [install] created, put back anything it overwrote, and disable the
+     * scheme (if any).
+     */
     fun uninstall(id: String): Boolean = runCatching {
         val dict = installed().firstOrNull { it.id == id } ?: return false
+        val backup = backupDir(id)
         dict.files.forEach { relative ->
             val file = File(rimeDir, relative)
-            if (file.isFile && file.canonicalPath.startsWith(rimeDir.canonicalPath)) file.delete()
+            if (!file.canonicalPath.startsWith(rimeDir.canonicalPath)) return@forEach
+            val saved = File(backup, relative)
+            if (saved.isFile) {
+                file.parentFile?.mkdirs()
+                saved.copyTo(file, overwrite = true)
+            } else if (file.isFile) {
+                file.delete()
+            }
         }
+        backup.deleteRecursively()
         File(manifestDir, "$id.json").delete()
         if (dict.schema.isNotBlank()) {
             setEnabledSchemes(enabledSchemes().filter { it != dict.schema })

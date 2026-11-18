@@ -57,4 +57,5 @@
     <string name="download_cancel_hint">点击取消</string>
     <string name="download_retry_hint">点击重试</string>
     <string name="download_cancelled">已取消</string>
+    <string name="rime_dict_uninstall_restores">%1$s · 卸载后恢复随包文件</string>
 </resources>
