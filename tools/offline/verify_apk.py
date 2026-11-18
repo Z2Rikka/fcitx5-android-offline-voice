@@ -1,4 +1,9 @@
-"""Check that a built APK is self-contained and cannot request Android network access."""
+"""Check that a built APK is self-contained, correctly signed and self-consistent.
+
+Network access is expected: the optional voice-model / dictionary downloads need it. The audio
+model itself still runs fully offline, so RECORD_AUDIO must be present and the bundled models must
+match their recorded hashes.
+"""
 import argparse
 import hashlib
 import json
@@ -20,7 +25,8 @@ def run(*command):
     return subprocess.check_output([str(x) for x in command], text=True, stderr=subprocess.STDOUT)
 
 permissions = run(a.build_tools/'aapt2', 'dump', 'permissions', a.apk)
-assert 'android.permission.INTERNET' not in permissions
+assert 'android.permission.INTERNET' in permissions, 'downloads of optional models need it'
+assert 'android.permission.ACCESS_NETWORK_STATE' in permissions
 assert 'android.permission.RECORD_AUDIO' in permissions
 badging = run(a.build_tools/'aapt2', 'dump', 'badging', a.apk)
 assert "package: name='org.fcitx.fcitx5.android.offline" in badging
