@@ -9,10 +9,12 @@
 | 功能 | 说明 |
 |---|---|
 | 长按空格语音 | 轻点空格照常输入空格；按住约 300ms 进入聆听，松手出字 |
-| 完全离线 | 模型随包内置，运行时不需要网络，应用未声明 `INTERNET` 权限 |
+| 语音全程离线 | 识别、解码都在本机完成；只有「语音模型 / 词库」页面点下载时才联网（APK 声明了 `INTERNET`） |
+| 可联网下载 | 「语音模型」「词库与方案」页可从远程 catalog 下载模型与词库，支持进度与 SHA-256 校验 |
+| 词库管理 | 列出 Rime 目录里的全部方案，一键切换（改 `schema_list`）并重新部署；下载的词库可卸载 |
 | 中英混说 | 流式 Zipformer 双语模型，边说边解码，松手后只补尾部音频 |
 | 静音自动结束 | 说完停顿自动收尾，时长可在 300-2000ms 间调整 |
-| 可切换的语音模型 | “设置 → 语音模型”里可在中英双语模型与中文轻量模型之间切换 |
+| 可切换的语音模型 | “设置 → 语音模型”里可在中英双语、中文轻量、导入/下载的模型之间切换 |
 | 卸载 / 导入模型 | 导入的模型可以卸载腾出空间；也支持从本地 `.zip` 导入自己的 sherpa-onnx 模型 |
 | 候选栏横向滑动 | 候选多时左右滑动候选栏继续找字；下拉候选窗照常可用（默认开启） |
 | 边打边算 | 输入 `3+3` 时候选区出现 `3+3=6`；不点它输入框保持原样，点了才替换成 `3+3=6` |
@@ -77,6 +79,47 @@
 
   固定置顶的词直接写进 `custom_phrase.txt`（雾凇给这个翻译器的权重是 99，永远排在前）。
   清空个人习惯就是删掉 `data/rime/rime_ice.userdb/` 后重新部署。
+
+## 联网下载（语音模型与词库）
+
+两个设置页都能从一份 JSON 目录里拉取可选内容，下载只在**你点具体条目时**才发生，不会后台偷跑：
+
+- 「语音模型 → 可下载的语音模型」：下载到 `files/voice-models/<id>/`，完成后自动切换。
+- 「词库与方案 → 可下载的词库」：下载到 `data/rime/`，写一份清单便于卸载，然后调 `FcitxDaemon.restartFcitx()`
+  触发 librime 重新部署（也可以点该页的「重新部署 Rime」）。
+- 「刷新下载列表」拉取 `RemoteCatalog.CATALOG_URL`，缓存在 `files/catalog.json`；离线时继续用缓存或
+  APK 内置的 `assets/catalog.json`。
+
+**目录格式**（改 `RemoteCatalog.CATALOG_URL` 或在设备上放一份到
+`/sdcard/Android/data/org.fcitx.fcitx5.android.offline/files/catalog.json` 即可覆盖）：
+
+```json
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "zh-14m-zipformer", "kind": "voice", "name": "中文轻量 Zipformer（14M）",
+      "note": "说明文字", "backend": "ZipformerTransducer",
+      "files": [
+        { "url": "https://…/encoder-epoch-99-avg-1.int8.onnx", "name": "encoder.int8.onnx",
+          "sha256": "可选，建议填", "size": 0 }
+      ]
+    },
+    {
+      "id": "rime-flypy", "kind": "dict", "name": "雾凇·小鹤双拼方案",
+      "schema": "double_pinyin_flypy",
+      "files": [
+        { "url": "https://…/double_pinyin_flypy.schema.yaml", "name": "double_pinyin_flypy.schema.yaml" }
+      ]
+    }
+  ]
+}
+```
+
+- `kind=voice`：`name` 是模型目录内的文件名，必须包含 encoder / decoder / tokens（+ 可选 joiner）。
+- `kind=dict`：`name` 是相对 Rime 目录的路径，`schema` 是要启用的方案 id（会写进 `default.custom.yaml`
+  的 `schema_list` 并置顶）。
+- `size`/`sha256` 可留空；填了就会在下载后校验，不匹配则丢弃。
 
 ## 构建
 

@@ -2,7 +2,7 @@
 
 面向 arm64 Android 手机（本次目标设备：iQOO Neo 7）。本版使用独立应用 ID `org.fcitx.fcitx5.android.offline`（debug 构建额外带 `.debug`），可与官方版本并存。
 
-包含 Rime、雾凇拼音，以及 sherpa-onnx 本地中英双语流式识别。语音推理使用 CPU，不依赖 Google 服务。最终 APK 应不含 INTERNET 权限。
+包含 Rime、雾凇拼音，以及 sherpa-onnx 本地中英双语流式识别。语音推理使用 CPU，不依赖 Google 服务。语音识别本身不联网；只有「语音模型 / 词库」页面里用户主动点击下载时才会访问网络（APK 因此声明了 INTERNET 权限）。
 
 ## 使用
 
