@@ -14,4 +14,23 @@
     <string name="offline_voice_permission_retry">允许麦克风权限后，请返回输入框，重新按住空格说话。</string>
     <string name="horizontal_candidate_scroll">候选栏横向滑动</string>
     <string name="horizontal_candidate_scroll_summary">左右滑动候选栏继续找字；下拉按钮仍然可用</string>
+    <string name="offline_voice_model_category">语音模型</string>
+    <string name="offline_voice_model_manage">管理</string>
+    <string name="offline_voice_model_current">使用中</string>
+    <string name="offline_voice_model_bundled">内置</string>
+    <string name="offline_voice_model_none">没有可用的语音模型</string>
+    <string name="offline_voice_model_none_summary">请重装应用，或在下方导入模型。</string>
+    <string name="offline_voice_model_import">从 .zip 文件导入模型</string>
+    <string name="offline_voice_model_imported">已导入 %1$s</string>
+    <string name="offline_voice_model_import_failed">导入失败：%1$s</string>
+    <string name="offline_voice_model_uninstall">卸载</string>
+    <string name="offline_voice_model_uninstall_name">卸载 %1$s</string>
+    <string name="offline_voice_model_uninstall_confirm">确定从设备上删除 %1$s？文件会被删除，之后可以重新导入。</string>
+    <string name="offline_voice_model_uninstalled">已卸载模型</string>
+    <string name="offline_voice_model_storage">已导入模型占用</string>
+    <string name="offline_voice_model_switched">已切换到 %1$s</string>
+    <string name="offline_voice_model_bilingual_name">中英双语 Zipformer</string>
+    <string name="offline_voice_model_bilingual_note">流式中英混说模型，准确率最高</string>
+    <string name="offline_voice_model_zh14m_name">中文轻量 Zipformer（14M）</string>
+    <string name="offline_voice_model_zh14m_note">仅中文，体积更小、速度更快</string>
 </resources>

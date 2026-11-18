@@ -34,6 +34,7 @@ import org.fcitx.fcitx5.android.ui.main.settings.global.GlobalConfigFragment
 import org.fcitx.fcitx5.android.ui.main.settings.im.InputMethodConfigFragment
 import org.fcitx.fcitx5.android.ui.main.settings.im.InputMethodListFragment
 import org.fcitx.fcitx5.android.ui.main.settings.theme.ThemeFragment
+import org.fcitx.fcitx5.android.ui.main.settings.voice.VoiceModelFragment
 import org.fcitx.fcitx5.android.utils.config.ConfigDescriptor
 import org.fcitx.fcitx5.android.utils.parcelable
 import kotlin.reflect.typeOf
@@ -73,6 +74,9 @@ sealed class SettingsRoute : Parcelable {
 
     @Serializable
     data object CandidatesWindow : SettingsRoute()
+
+    @Serializable
+    data object VoiceModels : SettingsRoute()
 
     @Serializable
     data object Clipboard : SettingsRoute()
@@ -212,6 +216,9 @@ sealed class SettingsRoute : Parcelable {
             }
             fragment<CandidatesSettingsFragment, CandidatesWindow> {
                 label = ctx.getString(R.string.candidates_window)
+            }
+            fragment<VoiceModelFragment, VoiceModels> {
+                label = ctx.getString(R.string.offline_voice_model_category)
             }
             fragment<ClipboardSettingsFragment, Clipboard> {
                 label = ctx.getString(R.string.clipboard)

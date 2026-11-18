@@ -17,11 +17,13 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.k2fsa.sherpa.onnx.FeatureConfig
 import com.k2fsa.sherpa.onnx.OnlineModelConfig
+import com.k2fsa.sherpa.onnx.OnlineParaformerModelConfig
 import com.k2fsa.sherpa.onnx.OnlineRecognizer
 import com.k2fsa.sherpa.onnx.OnlineRecognizerConfig
 import com.k2fsa.sherpa.onnx.OnlineTransducerModelConfig
 import org.fcitx.fcitx5.android.R
 import org.fcitx.fcitx5.android.data.prefs.AppPrefs
+import org.fcitx.fcitx5.android.data.prefs.ManagedPreference
 import org.fcitx.fcitx5.android.input.FcitxInputMethodService
 import org.fcitx.fcitx5.android.input.keyboard.TextKeyView
 import timber.log.Timber
@@ -50,7 +52,9 @@ class OfflineVoiceInput(private val service: FcitxInputMethodService) {
 
     private val worker = Executors.newSingleThreadExecutor()
     private val main = Handler(Looper.getMainLooper())
+    private val models = VoiceModelManager(service)
     private var recognizer: OnlineRecognizer? = null // worker thread only
+    private var recognizerModelId: String? = null // worker thread only
     private var session: Session? = null // main thread only
     private var lastCommit: LastCommit? = null // main thread only
     private var generation = 0L
@@ -58,25 +62,72 @@ class OfflineVoiceInput(private val service: FcitxInputMethodService) {
     private var statusKey: TextKeyView? = null
     private var originalLabel: CharSequence? = null
 
+    /** Kept outside the listener so R8 does not drop it. */
+    @androidx.annotation.Keep
+    private val modelChangeListener =
+        ManagedPreference.OnChangeListener<String> { _, _ -> resetEngine() }
+
+    init {
+        AppPrefs.getInstance().keyboard.offlineVoiceModel
+            .registerOnChangeListener(modelChangeListener)
+    }
+
     private fun engine(): OnlineRecognizer {
-        recognizer?.let { return it }
-        val directory = "offline-voice"
-        return OnlineRecognizer(service.assets, OnlineRecognizerConfig(
+        val model = models.selectedModel() ?: throw VoiceFailure(Failure.Model)
+        recognizer?.let {
+            if (recognizerModelId == model.id) return it
+            runCatching { it.release() }
+            recognizer = null
+            recognizerModelId = null
+        }
+        val built = createRecognizer(model)
+        recognizer = built
+        recognizerModelId = model.id
+        Timber.d("Offline voice: using model %s (%s)", model.id, model.files.backend)
+        return built
+    }
+
+    private fun createRecognizer(model: VoiceModel): OnlineRecognizer {
+        val directory = when (val source = model.source) {
+            is VoiceModelSource.Assets -> source.directory
+            is VoiceModelSource.Files -> source.directory.absolutePath
+        }
+        val files = model.files.resolve(directory)
+        val config = OnlineRecognizerConfig(
             featConfig = FeatureConfig(sampleRate = 16000, featureDim = 80),
             modelConfig = OnlineModelConfig(
-                transducer = OnlineTransducerModelConfig(
-                    encoder = "$directory/encoder.int8.onnx",
-                    decoder = "$directory/decoder.onnx",
-                    joiner = "$directory/joiner.int8.onnx"
-                ),
-                tokens = "$directory/tokens.txt",
+                transducer = if (files.joiner != null) OnlineTransducerModelConfig(
+                    encoder = files.encoder,
+                    decoder = files.decoder,
+                    joiner = files.joiner
+                ) else OnlineTransducerModelConfig(),
+                paraformer = if (files.joiner == null) OnlineParaformerModelConfig(
+                    encoder = files.encoder,
+                    decoder = files.decoder
+                ) else OnlineParaformerModelConfig(),
+                tokens = files.tokens,
                 numThreads = 2,
                 provider = "cpu",
-                modelType = "zipformer"
+                modelType = files.backend.modelType
             ),
             enableEndpoint = false,
             decodingMethod = "greedy_search"
-        )).also { recognizer = it }
+        )
+        return when (val source = model.source) {
+            is VoiceModelSource.Assets -> OnlineRecognizer(service.assets, config)
+            // the first constructor parameter is an optional AssetManager
+            is VoiceModelSource.Files -> OnlineRecognizer(config = config)
+        }
+    }
+
+    /** Drop the current recognizer so the next utterance loads the newly selected model. */
+    private fun resetEngine() {
+        if (destroyed) return
+        worker.execute {
+            runCatching { recognizer?.release() }
+            recognizer = null
+            recognizerModelId = null
+        }
     }
 
     /**
@@ -317,10 +368,13 @@ class OfflineVoiceInput(private val service: FcitxInputMethodService) {
 
     fun close() {
         destroyed = true
+        AppPrefs.getInstance().keyboard.offlineVoiceModel
+            .unregisterOnChangeListener(modelChangeListener)
         editorChanged()
         worker.execute {
             recognizer?.release()
             recognizer = null
+            recognizerModelId = null
         }
         worker.shutdown()
     }

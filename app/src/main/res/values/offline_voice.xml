@@ -15,4 +15,23 @@
     <string name="offline_voice_permission_retry">After allowing microphone access, return to the input field and hold space again.</string>
     <string name="horizontal_candidate_scroll">Swipe the candidate bar sideways</string>
     <string name="horizontal_candidate_scroll_summary">Load more candidates while scrolling; the expand button still opens the candidate window</string>
+    <string name="offline_voice_model_category">Offline voice models</string>
+    <string name="offline_voice_model_manage">Manage</string>
+    <string name="offline_voice_model_current">In use</string>
+    <string name="offline_voice_model_bundled">Bundled</string>
+    <string name="offline_voice_model_none">No voice model available</string>
+    <string name="offline_voice_model_none_summary">Reinstall the app or import a model below.</string>
+    <string name="offline_voice_model_import">Import a model from a .zip file</string>
+    <string name="offline_voice_model_imported">Imported %1$s</string>
+    <string name="offline_voice_model_import_failed">Import failed: %1$s</string>
+    <string name="offline_voice_model_uninstall">Uninstall</string>
+    <string name="offline_voice_model_uninstall_name">Uninstall %1$s</string>
+    <string name="offline_voice_model_uninstall_confirm">Remove %1$s from this device? The files will be deleted and you can import them again later.</string>
+    <string name="offline_voice_model_uninstalled">Model uninstalled</string>
+    <string name="offline_voice_model_storage">Storage used by imported models</string>
+    <string name="offline_voice_model_switched">Switched to %1$s</string>
+    <string name="offline_voice_model_bilingual_name">Chinese + English Zipformer</string>
+    <string name="offline_voice_model_bilingual_note">Streaming bilingual model, best accuracy</string>
+    <string name="offline_voice_model_zh14m_name">Chinese light Zipformer (14M)</string>
+    <string name="offline_voice_model_zh14m_note">Chinese only, faster and smaller</string>
 </resources>

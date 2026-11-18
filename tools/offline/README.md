@@ -13,6 +13,8 @@
 5. 切换输入框、关闭键盘、系统取消触摸或输入其他文字会取消本次语音。单次最长 60 秒。密码框禁用语音。
 6. 模型预置在 APK 中，安装后不需要下载。请在飞行模式下验证；中英混说、专名和缩写的准确率仍受模型影响。
 
+模型管理：设置 → 语音模型 可以切换模型、卸载导入的模型，也可以把 sherpa-onnx 模型打成 `.zip`（含 `encoder*.onnx`、`decoder*.onnx`、`joiner*.onnx`、`tokens*.txt`，可选 `model.json` 提供 `name`/`type`）后从本地导入。随包的模型放在 APK 资源里，不占额外空间，因此不提供卸载。
+
 本版使用自己的设置和词库目录，不会读取、覆盖或删除官方版的数据。原版里个人词库、主题和额外修改不会自动迁移。本版已经附带一份新的雾凇配置。录音只在内存中处理，不写音频文件。
 
 ## 打包输入
@@ -20,6 +22,7 @@
 - Fcitx5 与 Rime：本仓库及其固定版本子模块，保留原项目许可证。
 - sherpa-onnx Android SDK：v1.12.14；从官方 AAR 中只保留 arm64-v8a 的 JNI 库与公共类。
 - 语音模型：`csukuangfj/sherpa-onnx-streaming-zipformer-bilingual-zh-en-2023-02-20` 的 `encoder-epoch-99-avg-1.int8.onnx`、`decoder-epoch-99-avg-1.onnx`、`joiner-epoch-99-avg-1.int8.onnx`、`tokens.txt`。在 assets/offline-voice 中分别命名为 `encoder.int8.onnx`、`decoder.onnx`、`joiner.int8.onnx`、`tokens.txt`。
+- 可选语音模型：`csukuangfj/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23`，同样重命名为 `encoder.int8.onnx`、`decoder.onnx`、`joiner.int8.onnx`、`tokens.txt`，放到 `assets/offline-voice/zh-14m/`。这个目录缺失时应用只是不显示该模型，不影响构建。
 - 雾凇拼音：iDvel/rime-ice，提交 `927e1cf1d3eeb9bf4be85e3f684dba4dd485b6f6`。保留 LICENSE，随包安装 Lua、词库、OpenCC 和方案配置；默认启用 rime_ice。
 
 上游来源：

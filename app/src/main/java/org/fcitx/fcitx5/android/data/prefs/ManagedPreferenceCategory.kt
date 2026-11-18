@@ -78,6 +78,16 @@ abstract class ManagedPreferenceCategory(
         return pref
     }
 
+    /**
+     * A plain string preference without an auto-generated UI,
+     * for values that are edited on a dedicated screen.
+     */
+    protected fun string(key: String, defaultValue: String): ManagedPreference.PString {
+        val pref = ManagedPreference.PString(sharedPreferences, key, defaultValue)
+        pref.register()
+        return pref
+    }
+
     protected fun int(
         @StringRes
         title: Int,

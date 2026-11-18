@@ -84,6 +84,20 @@ jobs:
           curl -fL --retry 5 -o tokens.txt          "$base/tokens.txt"
           ls -lh
 
+      # 可选：中文轻量模型。上游仓库改名或临时不可用时不阻断构建，
+      # 应用会把这个模型显示为“不可用”，仍可使用双语模型或导入自己的 zip。
+      - name: 下载中文轻量模型（可选）
+        continue-on-error: true
+        run: |
+          mkdir -p app/src/main/assets/offline-voice/zh-14m
+          base=https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23/resolve/main
+          cd app/src/main/assets/offline-voice/zh-14m
+          curl -fL --retry 3 -o encoder.int8.onnx "$base/encoder-epoch-99-avg-1.int8.onnx"
+          curl -fL --retry 3 -o decoder.onnx        "$base/decoder-epoch-99-avg-1.onnx"
+          curl -fL --retry 3 -o joiner.int8.onnx    "$base/joiner-epoch-99-avg-1.int8.onnx"
+          curl -fL --retry 3 -o tokens.txt          "$base/tokens.txt"
+          ls -lh
+
       - name: 下载雾凇拼音
         run: |
           mkdir -p .local-build
