@@ -53,4 +53,8 @@
     <string name="rime_dict_redeploy_summary">安装或切换词库后需要重新部署才会生效</string>
     <string name="rime_dict_redeploying">正在重新部署 Rime…</string>
     <string name="download_in_progress">已有下载任务在进行</string>
+    <string name="download_progress_unknown">下载中…</string>
+    <string name="download_cancel_hint">点击取消</string>
+    <string name="download_retry_hint">点击重试</string>
+    <string name="download_cancelled">已取消</string>
 </resources>
