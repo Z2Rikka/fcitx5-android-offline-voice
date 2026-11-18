@@ -11,6 +11,7 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
+import java.io.FileOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.security.MessageDigest
@@ -77,7 +78,7 @@ object Downloader {
                 val contentLength = connection.contentLengthLong
                 if (contentLength > 0) total = if (append) written + contentLength else contentLength
                 connection.inputStream.use { input ->
-                    partial.outputStream(append).use { output ->
+                    FileOutputStream(partial, append).use { output ->
                         val buffer = ByteArray(BUFFER)
                         var reported = written
                         while (true) {

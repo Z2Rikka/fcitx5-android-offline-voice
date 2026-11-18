@@ -11,7 +11,7 @@ import org.junit.Test
 
 class ArithmeticSuggestionTest {
 
-    private fun suggest(text: String) = ArithmeticSuggestion.fromTextBeforeCursor(text)
+    private fun suggest(text: String?) = ArithmeticSuggestion.fromTextBeforeCursor(text)
 
     @Test
     fun basicAddition() {

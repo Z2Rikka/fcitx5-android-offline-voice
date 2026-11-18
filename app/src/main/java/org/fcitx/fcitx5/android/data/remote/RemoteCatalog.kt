@@ -25,7 +25,7 @@ data class CatalogEntry(
     val id: String,
     val name: String,
     val note: String = "",
-    /** [KIND_VOICE] or [KIND_DICT]. */
+    /** [RemoteCatalog.KIND_VOICE] or [RemoteCatalog.KIND_DICT]. */
     val kind: String,
     /** Voice models only: `ZipformerTransducer` / `Paraformer`. */
     val backend: String = "",
@@ -34,8 +34,8 @@ data class CatalogEntry(
     val files: List<CatalogFile> = emptyList()
 ) {
     val sizeBytes: Long get() = files.sumOf { it.size }
-    val isVoice: Boolean get() = kind == KIND_VOICE
-    val isDict: Boolean get() = kind == KIND_DICT
+    val isVoice: Boolean get() = kind == RemoteCatalog.KIND_VOICE
+    val isDict: Boolean get() = kind == RemoteCatalog.KIND_DICT
 }
 
 @Serializable
