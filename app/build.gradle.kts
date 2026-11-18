@@ -72,6 +72,8 @@ generateDataDescriptor {
     excludes.addAll(fileTree("src/main/assets/bundled-rime").files.map {
         it.relativeTo(file("src/main/assets")).invariantSeparatorsPath
     })
+    // read by RemoteCatalog via AssetManager, not part of the fcitx data directory
+    excludes.add("catalog.json")
     symlinks.put("usr/share/rime-data/opencc", "usr/share/opencc")
 }
 

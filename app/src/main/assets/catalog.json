@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "zh-14m-zipformer",
+      "kind": "voice",
+      "name": "中文轻量 Zipformer（14M）",
+      "note": "仅中文，体积小、速度快；下载后可在语音模型页切换",
+      "backend": "ZipformerTransducer",
+      "files": [
+        {
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23/resolve/main/encoder-epoch-99-avg-1.int8.onnx",
+          "name": "encoder.int8.onnx"
+        },
+        {
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23/resolve/main/decoder-epoch-99-avg-1.onnx",
+          "name": "decoder.onnx"
+        },
+        {
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23/resolve/main/joiner-epoch-99-avg-1.int8.onnx",
+          "name": "joiner.int8.onnx"
+        },
+        {
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23/resolve/main/tokens.txt",
+          "name": "tokens.txt"
+        }
+      ]
+    },
+    {
+      "id": "rime-flypy",
+      "kind": "dict",
+      "name": "雾凇·小鹤双拼方案",
+      "note": "重新下载雾凇拼音的小鹤双拼方案文件，安装后在词库页切换并重新部署",
+      "schema": "double_pinyin_flypy",
+      "files": [
+        {
+          "url": "https://raw.githubusercontent.com/iDvel/rime-ice/927e1cf1d3eeb9bf4be85e3f684dba4dd485b6f6/double_pinyin_flypy.schema.yaml",
+          "name": "double_pinyin_flypy.schema.yaml"
+        }
+      ]
+    }
+  ]
+}
