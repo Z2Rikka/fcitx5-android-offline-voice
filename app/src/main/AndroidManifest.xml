@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 下载支持 http://（例如局域网文件服务器）；语音识别本身不联网 -->
+
     <!-- remove unused permission from AppCompat -->
     <permission
         android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -41,6 +43,7 @@
     <uses-permission android:name="${applicationId}.permission.PLUGIN" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".FcitxApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
