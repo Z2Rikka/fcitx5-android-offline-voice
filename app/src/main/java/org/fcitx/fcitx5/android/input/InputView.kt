@@ -18,6 +18,7 @@ import androidx.annotation.Keep
 import androidx.annotation.RequiresApi
 import androidx.core.view.updateLayoutParams
 import org.fcitx.fcitx5.android.core.CapabilityFlags
+import org.fcitx.fcitx5.android.core.CandidateWord
 import org.fcitx.fcitx5.android.core.FcitxEvent
 import org.fcitx.fcitx5.android.daemon.FcitxConnection
 import org.fcitx.fcitx5.android.daemon.launchOnReady
@@ -27,6 +28,7 @@ import org.fcitx.fcitx5.android.data.theme.Theme
 import org.fcitx.fcitx5.android.data.theme.ThemeManager
 import org.fcitx.fcitx5.android.input.bar.KawaiiBarComponent
 import org.fcitx.fcitx5.android.input.broadcast.InputBroadcaster
+import org.fcitx.fcitx5.android.input.calculator.ArithmeticSuggestion
 import org.fcitx.fcitx5.android.input.broadcast.PreeditEmptyStateComponent
 import org.fcitx.fcitx5.android.input.broadcast.PunctuationComponent
 import org.fcitx.fcitx5.android.input.broadcast.ReturnKeyDrawableComponent
@@ -329,6 +331,11 @@ class InputView(
      * called when [InputView] is about to show, or restart
      */
     fun startInput(info: EditorInfo, capFlags: CapabilityFlags, restarting: Boolean = false) {
+        // candidates and the calculator chip of the previous editor must not leak into this one
+        lastCandidateList = FcitxEvent.CandidateListEvent.Data()
+        lastEmittedCandidates = null
+        arithmeticSuggestion = null
+        emitCandidates()
         broadcaster.onStartInput(info, capFlags)
         returnKeyDrawable.updateDrawableOnEditorInfo(info)
         if (focusChangeResetKeyboard || !restarting) {
@@ -352,7 +359,10 @@ class InputView(
     override fun handleFcitxEvent(it: FcitxEvent<*>) {
         when (it) {
             is FcitxEvent.CandidateListEvent -> {
-                broadcaster.onCandidateUpdate(it.data)
+                lastCandidateList = it.data
+                // re-emit here, so the calculator chip survives the empty candidate list that
+                // fcitx publishes right after a commit
+                emitCandidates()
             }
             is FcitxEvent.ClientPreeditEvent -> {
                 preeditEmptyState.updatePreeditEmptyState(clientPreedit = it.data)
@@ -375,6 +385,34 @@ class InputView(
 
     fun updateSelection(start: Int, end: Int) {
         broadcaster.onSelectionUpdate(start, end)
+    }
+
+    private var lastCandidateList = FcitxEvent.CandidateListEvent.Data()
+    private var lastEmittedCandidates: FcitxEvent.CandidateListEvent.Data? = null
+    private var arithmeticSuggestion: ArithmeticSuggestion.Suggestion? = null
+
+    /**
+     * Show `3+3=6` as a candidate while the engine itself has nothing to offer, so it behaves
+     * like any other candidate: the text in the editor is untouched unless the user taps it.
+     */
+    fun showArithmeticSuggestion(suggestion: ArithmeticSuggestion.Suggestion?) {
+        arithmeticSuggestion = suggestion
+        emitCandidates()
+    }
+
+    private fun emitCandidates() {
+        val suggestion = arithmeticSuggestion
+        val data = if (suggestion != null && lastCandidateList.candidates.isEmpty()) {
+            FcitxEvent.CandidateListEvent.Data(
+                total = 1,
+                candidates = arrayOf(CandidateWord(ArithmeticSuggestion.LABEL, suggestion.text, ""))
+            )
+        } else {
+            lastCandidateList
+        }
+        if (data == lastEmittedCandidates) return
+        lastEmittedCandidates = data
+        broadcaster.onCandidateUpdate(data)
     }
 
     @RequiresApi(Build.VERSION_CODES.R)

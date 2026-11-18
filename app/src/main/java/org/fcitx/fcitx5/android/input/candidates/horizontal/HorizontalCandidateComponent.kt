@@ -25,6 +25,7 @@ import org.fcitx.fcitx5.android.input.bar.ExpandButtonStateMachine.BooleanKey.Ex
 import org.fcitx.fcitx5.android.input.bar.ExpandButtonStateMachine.TransitionEvent.ExpandedCandidatesUpdated
 import org.fcitx.fcitx5.android.input.bar.KawaiiBarComponent
 import org.fcitx.fcitx5.android.input.broadcast.InputBroadcastReceiver
+import org.fcitx.fcitx5.android.input.calculator.ArithmeticSuggestion
 import org.fcitx.fcitx5.android.input.candidates.CandidateViewHolder
 import org.fcitx.fcitx5.android.input.candidates.expanded.decoration.FlexboxVerticalDecoration
 import org.fcitx.fcitx5.android.input.candidates.horizontal.HorizontalCandidateMode.AlwaysFillWidth
@@ -105,9 +106,17 @@ class HorizontalCandidateComponent :
                     flexGrow = layoutFlexGrow
                 }
                 holder.itemView.setOnClickListener {
-                    fcitx.launchOnReady { it.select(holder.idx) }
+                    if (holder.candidate.label == ArithmeticSuggestion.LABEL) {
+                        // `3+3=6` is not an engine candidate: replace the typed expression instead
+                        service.applyArithmeticSuggestion()
+                    } else {
+                        fcitx.launchOnReady { it.select(holder.idx) }
+                    }
                 }
                 holder.itemView.setOnLongClickListener {
+                    if (holder.candidate.label == ArithmeticSuggestion.LABEL) {
+                        return@setOnLongClickListener false
+                    }
                     inputView.showCandidateActionMenu(holder.idx, holder.candidate.text, holder.ui.root)
                     true
                 }

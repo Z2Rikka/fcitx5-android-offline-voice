@@ -14,6 +14,8 @@ import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import android.text.InputType
 import android.util.LruCache
@@ -63,6 +65,7 @@ import org.fcitx.fcitx5.android.data.prefs.ManagedPreference
 import org.fcitx.fcitx5.android.data.prefs.ManagedPreferenceProvider
 import org.fcitx.fcitx5.android.data.theme.Theme
 import org.fcitx.fcitx5.android.data.theme.ThemeManager
+import org.fcitx.fcitx5.android.input.calculator.ArithmeticSuggestion
 import org.fcitx.fcitx5.android.input.cursor.CursorRange
 import org.fcitx.fcitx5.android.input.cursor.CursorTracker
 import org.fcitx.fcitx5.android.utils.InputMethodUtil
@@ -121,6 +124,11 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     private var capabilityFlags = CapabilityFlags.DefaultFlags
 
     private val selection = CursorTracker()
+
+    /** Arithmetic suggestion offered as a candidate for the text before the cursor, if any. */
+    private var arithmeticSuggestion: ArithmeticSuggestion.Suggestion? = null
+
+    private val mainHandler = Handler(Looper.getMainLooper())
 
     val currentInputSelection: CursorRange
         get() = selection.latest
@@ -355,6 +363,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
     }
 
     private fun handleBackspaceKey() {
+        if (arithmeticSuggestion != null) mainHandler.post { refreshArithmeticSuggestion() }
         val lastSelection = selection.latest
         if (lastSelection.isNotEmpty()) {
             selection.predict(lastSelection.start)
@@ -425,7 +434,77 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         currentInputConnection.setSelection(target, target)
     }
 
+    /**
+     * Replace the typed expression with `expression=result`. Does nothing when there is no
+     * suggestion, which is also why the editor text stays untouched unless the chip is tapped.
+     */
+    fun applyArithmeticSuggestion() {
+        val suggestion = arithmeticSuggestion ?: return
+        val ic = currentInputConnection ?: return
+        // the editor may have changed since the chip was built; only replace an exact match
+        val before = runCatching {
+            ic.getTextBeforeCursor(suggestion.expression.length, 0)?.toString()
+        }.getOrNull()
+        if (before != suggestion.expression) {
+            clearArithmeticSuggestion()
+            return
+        }
+        arithmeticSuggestion = null
+        inputView?.showArithmeticSuggestion(null)
+        selection.predictOffset(-suggestion.expression.length)
+        ic.deleteSurroundingText(suggestion.expression.length, 0)
+        commitText(suggestion.text)
+    }
+
+    private fun EditorInfo.isPasswordField(): Boolean {
+        val inputClass = inputType and InputType.TYPE_MASK_CLASS
+        val variation = inputType and InputType.TYPE_MASK_VARIATION
+        return (inputClass == InputType.TYPE_CLASS_TEXT && variation in setOf(
+            InputType.TYPE_TEXT_VARIATION_PASSWORD,
+            InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD,
+            InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD
+        )) || (inputClass == InputType.TYPE_CLASS_NUMBER &&
+                variation == InputType.TYPE_NUMBER_VARIATION_PASSWORD)
+    }
+
+    private fun clearArithmeticSuggestion() {
+        arithmeticSuggestion = null
+        inputView?.showArithmeticSuggestion(null)
+    }
+
+    /**
+     * Recompute the arithmetic suggestion from the text before the cursor and hand it to the
+     * input view, which shows it as a single candidate.
+     */
+    private fun refreshArithmeticSuggestion() {
+        if (Looper.myLooper() != Looper.getMainLooper()) {
+            mainHandler.post { refreshArithmeticSuggestion() }
+            return
+        }
+        val suggestion = runCatching {
+            val info = currentInputEditorInfo ?: return@runCatching null
+            if (info.isPasswordField()) return@runCatching null
+            if (currentInputSelection.start != currentInputSelection.end) return@runCatching null
+            val ic = currentInputConnection ?: return@runCatching null
+            ArithmeticSuggestion.fromTextBeforeCursor(
+                ic.getTextBeforeCursor(ArithmeticSuggestion.MAX_LOOKBEHIND, 0)?.toString()
+            )
+        }.getOrNull()
+        if (suggestion == arithmeticSuggestion) return
+        arithmeticSuggestion = suggestion
+        // the calculator chip lives in the candidate bar, which only exists for the touch keyboard
+        inputView?.showArithmeticSuggestion(if (inputDeviceMgr.isVirtualKeyboard) suggestion else null)
+    }
+
     fun commitText(text: String, cursor: Int = -1) {
+        commitTextInternal(text, cursor)
+        // digits/operators may complete an arithmetic expression, letters never do
+        if (text.lastOrNull()?.let { it.isDigit() || it in "+-*/×÷＋－＊／" } == true) {
+            refreshArithmeticSuggestion()
+        }
+    }
+
+    private fun commitTextInternal(text: String, cursor: Int = -1) {
         val ic = currentInputConnection ?: return
         // when composing text equals commit content, finish composing text as-is
         if (composing.isNotEmpty() && composingText.toString() == text) {
@@ -737,6 +816,8 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
         // right cursor position, try to workaround this would simply introduce more bugs.
         selection.resetTo(attribute.initialSelStart, attribute.initialSelEnd)
         resetComposingState()
+        // the previous field's arithmetic chip must not leak into this one
+        clearArithmeticSuggestion()
         val flags = CapabilityFlags.fromEditorInfo(attribute)
         capabilityFlags = flags
         // EditorInfo may change between onStartInput and onStartInputView
@@ -803,6 +884,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
             cursorUpdateIndex
         )
         inputView?.updateSelection(newSelStart, newSelEnd)
+        if (arithmeticSuggestion != null) refreshArithmeticSuggestion()
     }
 
     private val contentSize = floatArrayOf(0f, 0f)
@@ -1073,6 +1155,7 @@ class FcitxInputMethodService : LifecycleInputMethodService() {
 
     override fun onFinishInput() {
         offlineVoice.editorChanged()
+        clearArithmeticSuggestion()
         Timber.d("onFinishInput")
         postFcitxJob {
             focus(false)
