@@ -42,5 +42,15 @@
     <string name="download_size">大小 %1$s</string>
     <string name="download_installed">已安装</string>
     <string name="voice_model_download_category">可下载的语音模型</string>
+    <string name="rime_dict_category">词库与方案</string>
+    <string name="rime_dict_schemes">可用方案</string>
+    <string name="rime_dict_downloads">可下载的词库</string>
+    <string name="rime_dict_current">使用中</string>
+    <string name="rime_dict_none">Rime 目录里没有找到方案文件</string>
+    <string name="rime_dict_uninstall_name">卸载 %1$s</string>
+    <string name="rime_dict_uninstall_confirm">删除 %1$s 下载的文件并从方案列表移除？</string>
+    <string name="rime_dict_redeploy">重新部署 Rime</string>
+    <string name="rime_dict_redeploy_summary">安装或切换词库后需要重新部署才会生效</string>
+    <string name="rime_dict_redeploying">正在重新部署 Rime…</string>
     <string name="download_in_progress">已有下载任务在进行</string>
 </resources>

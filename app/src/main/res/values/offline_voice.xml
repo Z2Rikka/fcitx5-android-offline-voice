@@ -43,5 +43,15 @@
     <string name="download_size">Size %1$s</string>
     <string name="download_installed">Installed</string>
     <string name="voice_model_download_category">Downloadable voice models</string>
+    <string name="rime_dict_category">Rime dictionaries</string>
+    <string name="rime_dict_schemes">Available schemes</string>
+    <string name="rime_dict_downloads">Downloadable dictionaries</string>
+    <string name="rime_dict_current">In use</string>
+    <string name="rime_dict_none">No scheme found in the Rime directory</string>
+    <string name="rime_dict_uninstall_name">Uninstall %1$s</string>
+    <string name="rime_dict_uninstall_confirm">Delete the downloaded files of %1$s and remove its scheme?</string>
+    <string name="rime_dict_redeploy">Redeploy Rime</string>
+    <string name="rime_dict_redeploy_summary">Needed after installing or switching a dictionary</string>
+    <string name="rime_dict_redeploying">Redeploying Rime…</string>
     <string name="download_in_progress">Another download is running</string>
 </resources>

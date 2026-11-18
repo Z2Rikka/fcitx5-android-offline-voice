@@ -105,6 +105,11 @@ class MainFragment : PaddingPreferenceFragment() {
                     SettingsRoute.VoiceModels
                 )
                 addDestinationPreference(
+                    R.string.rime_dict_category,
+                    R.drawable.ic_baseline_language_24,
+                    SettingsRoute.RimeDicts
+                )
+                addDestinationPreference(
                     R.string.clipboard,
                     R.drawable.ic_clipboard,
                     SettingsRoute.Clipboard
