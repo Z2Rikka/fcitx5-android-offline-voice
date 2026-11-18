@@ -13,4 +13,6 @@
     <string name="offline_voice_error_recognition">Recognition failed. Hold space again to retry.</string>
     <string name="voice_silence_timeout">End after silence</string>
     <string name="offline_voice_permission_retry">After allowing microphone access, return to the input field and hold space again.</string>
+    <string name="horizontal_candidate_scroll">Swipe the candidate bar sideways</string>
+    <string name="horizontal_candidate_scroll_summary">Load more candidates while scrolling; the expand button still opens the candidate window</string>
 </resources>

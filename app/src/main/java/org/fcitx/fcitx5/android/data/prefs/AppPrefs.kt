@@ -260,6 +260,14 @@ class AppPrefs(private val sharedPreferences: SharedPreferences) {
             "horizontal_candidate_style",
             HorizontalCandidateMode.AutoFillWidth
         )
+        // New feature, independent from the expand (more candidates) button:
+        // the candidate bar can be swiped sideways and lazily loads more candidates.
+        val horizontalCandidateScroll = switch(
+            R.string.horizontal_candidate_scroll,
+            "horizontal_candidate_scroll",
+            true,
+            summary = R.string.horizontal_candidate_scroll_summary
+        )
         val expandedCandidateStyle = enumList(
             R.string.expanded_candidate_style,
             "expanded_candidate_style",

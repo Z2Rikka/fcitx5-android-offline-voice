@@ -10,10 +10,13 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import org.fcitx.fcitx5.android.R
 import org.fcitx.fcitx5.android.core.FcitxEvent
 import org.fcitx.fcitx5.android.daemon.launchOnReady
@@ -30,10 +33,12 @@ import org.fcitx.fcitx5.android.input.candidates.horizontal.HorizontalCandidateM
 import org.fcitx.fcitx5.android.input.dependency.UniqueViewComponent
 import org.fcitx.fcitx5.android.input.dependency.context
 import org.fcitx.fcitx5.android.input.dependency.fcitx
+import org.fcitx.fcitx5.android.input.dependency.inputMethodService
 import org.fcitx.fcitx5.android.input.dependency.inputView
 import org.fcitx.fcitx5.android.input.dependency.theme
 import org.mechdancer.dependency.manager.must
 import splitties.dimensions.dp
+import timber.log.Timber
 import kotlin.math.max
 
 class HorizontalCandidateComponent :
@@ -43,9 +48,16 @@ class HorizontalCandidateComponent :
     private val fcitx by manager.fcitx()
     private val theme by manager.theme()
     private val inputView by manager.inputView()
+    private val service by manager.inputMethodService()
     private val bar: KawaiiBarComponent by manager.must()
 
     private val fillStyle by AppPrefs.getInstance().keyboard.horizontalCandidateStyle
+    private val scrollable by AppPrefs.getInstance().keyboard.horizontalCandidateScroll
+
+    /** Whether the engine can hand out candidates beyond the ones already displayed. */
+    private var moreAvailable = false
+    private var loadMoreJob: Job? = null
+    private var candidateGeneration = 0
     private val maxSpanCountPref by lazy {
         AppPrefs.getInstance().keyboard.run {
             if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
@@ -111,13 +123,19 @@ class HorizontalCandidateComponent :
 
     val layoutManager: FlexboxLayoutManager by lazy {
         object : FlexboxLayoutManager(context) {
+            init {
+                // Horizontal scrolling needs a single non-wrapping flex line
+                if (scrollable) flexWrap = FlexWrap.NOWRAP
+            }
+
             override fun canScrollVertically() = false
-            override fun canScrollHorizontally() = false
+            override fun canScrollHorizontally() = scrollable
+
             override fun onLayoutCompleted(state: RecyclerView.State) {
                 super.onLayoutCompleted(state)
                 val cnt = this.childCount
                 if (secondLayoutPassNeeded) {
-                    if (cnt < adapter.candidates.size) {
+                    if (cnt < adapter.itemCount) {
                         // [^2] RecyclerView can't display all candidates
                         // update LayoutParams in onLayoutCompleted would trigger another
                         // onLayoutCompleted, skip the second one to avoid infinite loop
@@ -132,7 +150,10 @@ class HorizontalCandidateComponent :
                         secondLayoutPassNeeded = false
                     }
                 }
-                refreshExpanded(cnt)
+                // The expanded window continues after every candidate the bar already holds,
+                // which stays correct when more candidates were appended while scrolling.
+                refreshExpanded(adapter.itemCount)
+                if (scrollable) maybeLoadMoreCandidates()
             }
             // no need to override `generate{,Default}LayoutParams`, because HorizontalCandidateViewAdapter
             // guarantees ViewHolder's layoutParams to be `FlexboxLayoutManager.LayoutParams`
@@ -163,6 +184,11 @@ class HorizontalCandidateComponent :
             adapter = this@HorizontalCandidateComponent.adapter
             layoutManager = this@HorizontalCandidateComponent.layoutManager
             addItemDecoration(FlexboxVerticalDecoration(dividerDrawable))
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if (dx != 0) maybeLoadMoreCandidates()
+                }
+            })
         }
     }
 
@@ -189,10 +215,64 @@ class HorizontalCandidateComponent :
                 secondLayoutPassNeeded = false
             }
         }
+        candidateGeneration++
+        moreAvailable = if (scrollable) {
+            if (total < 0) true else candidates.size < total
+        } else {
+            false
+        }
         adapter.updateCandidates(candidates, total)
         // not sure why empty candidates won't trigger `FlexboxLayoutManager#onLayoutCompleted()`
         if (candidates.isEmpty()) {
             refreshExpanded(0)
         }
+        // The first screenful is often narrower than the bar, so load a few more right away
+        // instead of waiting for the user to reach the end.
+        if (scrollable && moreAvailable) maybeLoadMoreCandidates()
+    }
+
+    /**
+     * Fetch candidates past the end of the displayed list and append them, so the bar can be
+     * scrolled sideways instead of opening the expanded candidate window.
+     */
+    private fun maybeLoadMoreCandidates() {
+        if (!scrollable || !moreAvailable) return
+        val total = adapter.total
+        val loaded = adapter.itemCount
+        if (loaded <= 0) return
+        if (total > 0 && loaded >= total) {
+            moreAvailable = false
+            return
+        }
+        if (loadMoreJob?.isActive == true) return
+        // Only load when the user has scrolled close to the end, otherwise a long candidate
+        // list would be fetched on every keystroke.
+        val lastVisible = layoutManager.findLastVisibleItemPosition()
+        if (lastVisible < loaded - LOOKAHEAD) return
+        val generation = candidateGeneration
+        loadMoreJob = service.lifecycleScope.launch {
+            val more = try {
+                fcitx.runOnReady { getCandidates(loaded, LOAD_BATCH) }
+            } catch (e: Exception) {
+                Timber.w(e, "Failed to load more candidates")
+                return@launch
+            }
+            if (generation != candidateGeneration) return@launch
+            if (more.isEmpty()) {
+                moreAvailable = false
+                return@launch
+            }
+            adapter.appendCandidates(more)
+            if (more.size < LOAD_BATCH) moreAvailable = false
+        }
+    }
+
+    private companion object {
+        /** How many candidates to fetch in one go while scrolling. */
+        const val LOAD_BATCH = 24
+
+        /** Start loading again when this many items are left before the end. */
+        const val LOOKAHEAD = 2
+
     }
 }

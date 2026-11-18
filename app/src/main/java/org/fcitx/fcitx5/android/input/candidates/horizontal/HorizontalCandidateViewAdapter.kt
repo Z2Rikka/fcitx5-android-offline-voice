@@ -26,22 +26,35 @@ open class HorizontalCandidateViewAdapter(val theme: Theme) :
         setHasStableIds(true)
     }
 
-    var candidates: Array<CandidateWord> = arrayOf()
-        private set
+    private val items = mutableListOf<CandidateWord>()
 
     var total = -1
         private set
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateCandidates(data: Array<CandidateWord>, total: Int) {
-        this.candidates = data
+        items.clear()
+        items.addAll(data)
         this.total = total
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = candidates.size
+    /**
+     * Append candidates fetched for indices beyond the ones already displayed, so the bar can be
+     * scrolled sideways without opening the expanded candidate window.
+     */
+    fun appendCandidates(data: Array<CandidateWord>) {
+        if (data.isEmpty()) return
+        val start = items.size
+        items.addAll(data)
+        notifyItemRangeInserted(start, data.size)
+    }
 
-    override fun getItemId(position: Int) = candidates.getOrNull(position).hashCode().toLong()
+    override fun getItemCount() = items.size
+
+    // Positions are stable ids: the list is rebuilt on every candidate update,
+    // and identical candidate words would otherwise share an id.
+    override fun getItemId(position: Int) = position.toLong()
 
     @CallSuper
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidateViewHolder {
@@ -56,7 +69,7 @@ open class HorizontalCandidateViewAdapter(val theme: Theme) :
 
     @CallSuper
     override fun onBindViewHolder(holder: CandidateViewHolder, position: Int) {
-        holder.update(position, candidates[position])
+        holder.update(position, items[position])
     }
 
     @CallSuper

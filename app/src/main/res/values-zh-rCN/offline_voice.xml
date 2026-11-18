@@ -12,4 +12,6 @@
     <string name="offline_voice_error_recognition">识别出错，重新按住空格再试。</string>
     <string name="voice_silence_timeout">停顿多久结束录音</string>
     <string name="offline_voice_permission_retry">允许麦克风权限后，请返回输入框，重新按住空格说话。</string>
+    <string name="horizontal_candidate_scroll">候选栏横向滑动</string>
+    <string name="horizontal_candidate_scroll_summary">左右滑动候选栏继续找字；下拉按钮仍然可用</string>
 </resources>
