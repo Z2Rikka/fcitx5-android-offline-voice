@@ -6,14 +6,21 @@ package org.fcitx.fcitx5.android.ui.main.settings.voice
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.OpenableColumns
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.Preference
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.fcitx.fcitx5.android.R
+import org.fcitx.fcitx5.android.data.remote.CatalogEntry
+import org.fcitx.fcitx5.android.data.remote.Downloader
+import org.fcitx.fcitx5.android.data.remote.RemoteCatalog
 import org.fcitx.fcitx5.android.input.voice.VoiceModel
 import org.fcitx.fcitx5.android.input.voice.VoiceModelManager
 import org.fcitx.fcitx5.android.input.voice.VoiceModelSource
@@ -21,9 +28,12 @@ import org.fcitx.fcitx5.android.ui.common.PaddingPreferenceFragment
 import org.fcitx.fcitx5.android.utils.addCategory
 import org.fcitx.fcitx5.android.utils.addPreference
 import org.fcitx.fcitx5.android.utils.toast
+import timber.log.Timber
+import java.io.File
 
 /**
- * Switch between the bundled / imported offline voice models and uninstall imported ones.
+ * Switch between bundled / imported / downloaded offline voice models, uninstall imported ones,
+ * and pull optional models from the remote catalog.
  */
 class VoiceModelFragment : PaddingPreferenceFragment() {
 
@@ -33,6 +43,9 @@ class VoiceModelFragment : PaddingPreferenceFragment() {
         registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
             if (uri != null) importModel(uri)
         }
+
+    private val mainHandler = Handler(Looper.getMainLooper())
+    private var downloadJob: Job? = null
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         buildScreen()
@@ -71,6 +84,31 @@ class VoiceModelFragment : PaddingPreferenceFragment() {
                     )
                 }
             }
+            addCategory(R.string.voice_model_download_category) {
+                addPreference(R.string.catalog_refresh) { refreshCatalog() }
+                val entries = RemoteCatalog.load(ctx)
+                    .ofKind(RemoteCatalog.KIND_VOICE)
+                    .filter { entry -> manager.availableModels().none { it.id == entry.id } }
+                if (entries.isEmpty()) {
+                    addPreference(
+                        R.string.offline_voice_model_none,
+                        R.string.offline_voice_model_none_summary
+                    )
+                }
+                entries.forEach { entry ->
+                    val row = Preference(ctx).apply {
+                        isIconSpaceReserved = false
+                        isSingleLineTitle = false
+                        title = entry.name
+                        summary = downloadSummary(entry)
+                        setOnPreferenceClickListener { clicked ->
+                            startDownload(entry, clicked)
+                            true
+                        }
+                    }
+                    addPreference(row)
+                }
+            }
             addCategory(R.string.offline_voice_model_manage) {
                 addPreference(R.string.offline_voice_model_import) {
                     importZip.launch(arrayOf("application/zip", "application/octet-stream", "*/*"))
@@ -107,6 +145,76 @@ class VoiceModelFragment : PaddingPreferenceFragment() {
     private fun sizeOf(model: VoiceModel): Long =
         (model.source as? VoiceModelSource.Files)?.directory
             ?.walkTopDown()?.filter { it.isFile }?.sumOf { it.length() } ?: 0L
+
+    private fun downloadSummary(entry: CatalogEntry): String {
+        val parts = mutableListOf<String>()
+        if (entry.note.isNotBlank()) parts += entry.note
+        if (entry.sizeBytes > 0) {
+            parts += getString(
+                R.string.download_size, VoiceModelManager.formatSize(entry.sizeBytes)
+            )
+        }
+        return parts.joinToString(SEPARATOR)
+    }
+
+    private fun startDownload(entry: CatalogEntry, row: Preference?) {
+        val ctx = requireContext()
+        if (downloadJob?.isActive == true) {
+            ctx.toast(R.string.download_in_progress)
+            return
+        }
+        val staging = manager.stagingDir(entry.id)
+        downloadJob = viewLifecycleOwner.lifecycleScope.launch {
+            staging.deleteRecursively()
+            staging.mkdirs()
+            val result = withContext(Dispatchers.IO) {
+                runCatching {
+                    entry.files.forEachIndexed { index, file ->
+                        Downloader.download(
+                            url = file.url,
+                            target = File(staging, file.name),
+                            expectedSha256 = file.sha256,
+                            expectedSize = file.size
+                        ) { done, total ->
+                            if (total <= 0) return@download
+                            val percent = (done * 100 / total).toInt()
+                            mainHandler.post {
+                                row?.summary = ctx.getString(
+                                    R.string.download_progress, percent
+                                )
+                            }
+                        }.getOrThrow()
+                        Timber.d("voice model %s: file %d/%d", entry.id, index + 1, entry.files.size)
+                    }
+                    manager.installDownloaded(
+                        entry.id, entry.name, entry.note, entry.backend, staging
+                    ).getOrThrow()
+                }
+            }
+            result
+                .onSuccess { model ->
+                    manager.select(model.id)
+                    ctx.toast(getString(R.string.download_done, model.name))
+                    buildScreen()
+                }
+                .onFailure {
+                    Timber.w(it, "download %s failed", entry.id)
+                    staging.deleteRecursively()
+                    ctx.toast(getString(R.string.download_failed, it.message ?: ""))
+                    buildScreen()
+                }
+        }
+    }
+
+    private fun refreshCatalog() {
+        val ctx = requireContext()
+        viewLifecycleOwner.lifecycleScope.launch {
+            RemoteCatalog.refresh(ctx)
+                .onSuccess { ctx.toast(getString(R.string.catalog_refresh_done, it.entries.size)) }
+                .onFailure { ctx.toast(getString(R.string.catalog_refresh_failed, it.message ?: "")) }
+            buildScreen()
+        }
+    }
 
     private fun confirmUninstall(model: VoiceModel) {
         AlertDialog.Builder(requireContext())

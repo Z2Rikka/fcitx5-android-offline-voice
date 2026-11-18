@@ -33,4 +33,14 @@
     <string name="offline_voice_model_bilingual_note">流式中英混说模型，准确率最高</string>
     <string name="offline_voice_model_zh14m_name">中文轻量 Zipformer（14M）</string>
     <string name="offline_voice_model_zh14m_note">仅中文，体积更小、速度更快</string>
+    <string name="catalog_refresh">刷新下载列表</string>
+    <string name="catalog_refresh_done">列表已更新（%1$d 项）</string>
+    <string name="catalog_refresh_failed">刷新失败：%1$s</string>
+    <string name="download_progress">下载中 %1$d%%</string>
+    <string name="download_failed">下载失败：%1$s</string>
+    <string name="download_done">已下载 %1$s</string>
+    <string name="download_size">大小 %1$s</string>
+    <string name="download_installed">已安装</string>
+    <string name="voice_model_download_category">可下载的语音模型</string>
+    <string name="download_in_progress">已有下载任务在进行</string>
 </resources>

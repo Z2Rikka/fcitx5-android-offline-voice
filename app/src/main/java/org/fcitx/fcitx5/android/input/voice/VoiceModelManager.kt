@@ -127,6 +127,58 @@ class VoiceModelManager(private val context: Context) {
         }
     }
 
+    /** Scratch directory for a download in progress. */
+    fun stagingDir(id: String): File =
+        File(root, ".download-" + id.lowercase().replace(Regex("[^a-z0-9._-]+"), "-"))
+
+    /**
+     * Install a model whose files were downloaded into [staging] (one file per [CatalogFile.name]).
+     * Reuses the same metadata and validation as [importFromZip].
+     */
+    fun installDownloaded(
+        id: String,
+        name: String,
+        note: String,
+        backend: String,
+        staging: File
+    ): Result<VoiceModel> = runCatching {
+        val names = staging.listFiles()?.filter { it.isFile }?.map { it.name }.orEmpty()
+        val detected = detect(names) ?: error("缺少模型文件")
+        val files = detected.files.copy(
+            backend = VoiceModelBackend.fromName(backend) ?: detected.backend
+        )
+        val safeId = id.lowercase().replace(Regex("[^a-z0-9._-]+"), "-").trim('-', '.', '_')
+            .ifEmpty { "downloaded-model" }
+        val target = File(root, safeId)
+        check(!target.exists() || target.deleteRecursively()) { "无法替换 $safeId" }
+        check(staging.renameTo(target)) { "无法安装 $safeId" }
+        File(target, META_FILE).writeText(
+            json.encodeToString(
+                InstalledModelMeta(safeId, name.ifBlank { safeId }, note, files)
+            )
+        )
+        Timber.i("Installed downloaded voice model %s (%s)", safeId, files.backend)
+        readInstalled(target)
+    }.onFailure { Timber.w(it, "installDownloaded(%s) failed", id) }
+
+    /** Map a set of file names onto a model layout, or `null` when something is missing. */
+    private fun detect(names: List<String>): Detected? {
+        fun pick(prefix: String, suffix: String): String? =
+            names.firstOrNull { it == prefix + suffix }
+                ?: names.firstOrNull { it.startsWith(prefix) && it.endsWith(suffix) }
+        val encoder = pick("encoder", ".onnx") ?: return null
+        val decoder = pick("decoder", ".onnx") ?: return null
+        val joiner = pick("joiner", ".onnx")
+        val tokens = pick("tokens", ".txt") ?: return null
+        val backend = if (joiner != null) VoiceModelBackend.ZipformerTransducer
+        else VoiceModelBackend.Paraformer
+        return Detected(
+            files = VoiceModelFiles(encoder, decoder, joiner, tokens, backend),
+            backend = backend,
+            meta = null
+        )
+    }
+
     private fun readInstalled(dir: File): VoiceModel {
         val metaFile = File(dir, META_FILE)
         val meta = json.decodeFromString<InstalledModelMeta>(metaFile.readText())
@@ -170,7 +222,9 @@ class VoiceModelManager(private val context: Context) {
         val files: VoiceModelFiles,
         val backend: VoiceModelBackend,
         val meta: ZipMeta?
-    )
+    ) {
+        fun copy(meta: ZipMeta?) = Detected(files, backend, meta)
+    }
 
     private fun extract(uri: Uri, target: File): Detected {
         var meta: ZipMeta? = null
@@ -210,21 +264,8 @@ class VoiceModelManager(private val context: Context) {
             }
         }
         check(stored.isNotEmpty()) { "The archive contains no model files" }
-        fun pick(prefix: String, suffix: String): String? =
-            // prefer the exact canonical name, then anything like encoder-epoch-99...onnx
-            stored.firstOrNull { it == prefix + suffix }
-                ?: stored.firstOrNull { it.startsWith(prefix) && it.endsWith(suffix) }
-        val encoder = pick("encoder", ".onnx") ?: error("Missing encoder.onnx")
-        val decoder = pick("decoder", ".onnx") ?: error("Missing decoder.onnx")
-        val joiner = pick("joiner", ".onnx")
-        val tokens = pick("tokens", ".txt") ?: error("Missing tokens.txt")
-        val backend = if (joiner != null) VoiceModelBackend.ZipformerTransducer
-        else VoiceModelBackend.Paraformer
-        return Detected(
-            files = VoiceModelFiles(encoder, decoder, joiner, tokens, backend),
-            backend = backend,
-            meta = meta
-        )
+        val detected = detect(stored) ?: error("压缩包缺少 encoder/decoder/tokens")
+        return detected.copy(meta = meta)
     }
 
     companion object {

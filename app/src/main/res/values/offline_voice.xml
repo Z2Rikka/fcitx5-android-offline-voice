@@ -34,4 +34,14 @@
     <string name="offline_voice_model_bilingual_note">Streaming bilingual model, best accuracy</string>
     <string name="offline_voice_model_zh14m_name">Chinese light Zipformer (14M)</string>
     <string name="offline_voice_model_zh14m_note">Chinese only, faster and smaller</string>
+    <string name="catalog_refresh">Refresh download list</string>
+    <string name="catalog_refresh_done">List updated (%1$d entries)</string>
+    <string name="catalog_refresh_failed">Refresh failed: %1$s</string>
+    <string name="download_progress">Downloading %1$d%%</string>
+    <string name="download_failed">Download failed: %1$s</string>
+    <string name="download_done">Downloaded %1$s</string>
+    <string name="download_size">Size %1$s</string>
+    <string name="download_installed">Installed</string>
+    <string name="voice_model_download_category">Downloadable voice models</string>
+    <string name="download_in_progress">Another download is running</string>
 </resources>
